@@ -424,66 +424,7 @@ List<String> s = ["https://vod-progressive.akamaized.net/exp=1687977964~acl=%2Fv
 
 
 
-// class VideoApp extends StatefulWidget {
-//   const VideoApp({required Key key}) : super(key: key);
-//
-//   @override
-//   Extended createState() => Extended();
-// }
-//
-// class Extended extends State<VideoApp>{
-//   final String videoPath = 'assets/videos/childpose.mp4';
-//
-//   late VideoPlayerController controller;
-//
-//   @override
-//   void initState() {
-//     loadVideoPlayer();
-//     super.initState();
-//   }
-//
-//   loadVideoPlayer(){
-//     controller = VideoPlayerController.asset(videoPath);
-//     controller.addListener(() {
-//       setState(() {});
-//     });
-//     controller.initialize().then((value){
-//       setState(() {});
-//     });
-//
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body:
-//       Center(
-//       child: ListView(
-//       children: [
-//         AspectRatio(
-//           aspectRatio: controller.value.aspectRatio,
-//           child: VideoPlayer(controller),
-//         ),
-//         Container(
-//             child: VideoProgressIndicator(
-//                 controller,
-//                 allowScrubbing: true,
-//                 colors:VideoProgressColors(
-//                   backgroundColor: Colors.redAccent,
-//                   playedColor: Colors.green,
-//                   bufferedColor: Colors.purple,
-//                 )
-//             )
-//         ),
-//
-//
-//         ]
-//     )
-//       )
-//     );
-//
-//   }
-// }
+
 
 class Extended extends StatelessWidget {
   
