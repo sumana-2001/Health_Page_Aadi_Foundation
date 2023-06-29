@@ -43,11 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     enableInfiniteScroll: true),
               )),
               SizedBox(
-                height: 15,
+                height: MediaQuery.of(context).size.height/40,
               ),
               buildindicator(),
               SizedBox(
-                height: 15,
+                height: MediaQuery.of(context).size.height/40,
               ),
               Container(
                 height: MediaQuery.of(context).size.height/6,
@@ -73,7 +73,43 @@ class _MyHomePageState extends State<MyHomePage> {
                     )
                   ],
                 ),
-              )
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height/10 ,
+              ),
+              Container(
+                width: 190,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(//background color of button
+                        side: BorderSide(
+                            width:3,
+                            color:Colors.blue), //border width and color
+                        elevation: 3, //elevation of button
+                        shape: RoundedRectangleBorder( //to set border radius to button
+                            borderRadius: BorderRadius.circular(20)
+                        ),
+                        padding: EdgeInsets.all(15) //content padding inside button
+                    ),
+                    onPressed: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ExerciseDetails()),
+                      );
+                    },
+                    child:  Row(
+                        children: [
+                          Text(
+                              "Get Started",
+                            style: TextStyle(
+                              fontSize: 25
+                            ),
+                          ),
+                          Icon(Icons.arrow_forward)
+                        ],
+                      ),
+                    )
+                ),
+
             ],
           ),
         ),
@@ -98,3 +134,5 @@ final List<String> img = [
   'assets/test/img.jpg',
   'assets/test/img.jpg'
 ];
+
+

@@ -1,77 +1,77 @@
-//
-// Widget useless(BuildContext context) {
-//
-//   return Scaffold(
-//       body: Container(
-//           child: ListView(
-//               children: [
-//                 CarouselSlider(
-//                   items:
-//                   [
-//                     Container(
-//                       decoration: BoxDecoration(
-//                         borderRadius: BorderRadius.circular(20.0),
-//                         image: DecorationImage(
-//                           image: NetworkImage("https://img.freepik.com/premium-vector/young-happy-girl-practices-yoga-meditates-pigeon-pose-physical-spiritual-practice-vector-illustration-flat-cartoon-style_173706-45.jpg"),
-//
-//                         ),
-//                       ),
-//                       child: Text("Start your yoga journey now"),
-//                     ),
-//
-//                     Container(
-//                       margin: EdgeInsets.all(8.0),
-//                       decoration: BoxDecoration(
-//                         borderRadius: BorderRadius.circular(20.0),
-//                         image: DecorationImage(
-//                           image: NetworkImage("https://img.freepik.com/premium-vector/workout-cardio-weightlifting-with-personal-gym-coach-woman-training-with-dumbbells-fitness-exercises-active-lifestyle-health-care-wellness-vector-sport-illustration_176516-2459.jpg?w=740"),
-//
-//                         ),
-//                       ),
-//                       child: Text("Start your Exercise journey now"),
-//                     ),
-//
-//                     Container(
-//                       margin: EdgeInsets.all(10.0),
-//                       decoration: BoxDecoration(
-//                         borderRadius: BorderRadius.circular(20.0),
-//                         image: DecorationImage(
-//                           image: NetworkImage("https://previews.123rf.com/images/jemastock/jemastock1707/jemastock170708641/81882932-rythmic-gymnast-with-ribbon-athlete-sport-avatar-icon-image-vector-illustration-design.jpg"),
-//
-//                         ),
-//                       ),
-//                       child: Text("Start your Gymnastics journey now"),
-//                     ),
-//
-//                   ]
-//                   ,
-//                   options:CarouselOptions(
-//                     height: 600.0,
-//                     enlargeCenterPage: true,
-//                     autoPlay: true,
-//                     aspectRatio: 16 / 9,
-//                     autoPlayCurve: Curves.fastOutSlowIn,
-//                     enableInfiniteScroll: true,
-//                     autoPlayAnimationDuration: Duration(milliseconds: 800),
-//                     viewportFraction: 0.8,
-//                   ),
-//                 ),
-//                 FloatingActionButton.extended(
-//                   heroTag: null,
-//                   backgroundColor: Colors.blue,
-//                   foregroundColor: Colors.blue,
-//
-//                   onPressed: () {
-//                     Navigator.push(
-//                       context,
-//                       MaterialPageRoute(builder: (context) => ExerciseDetails()),
-//                     );
-//                   }, label: const Text("GET STARTED",style: TextStyle(color: Colors.white),),
-//
-//                 ),
-//               ]
-//
-//           )
-//       )
-//   );
-// }
+
+Widget useless(BuildContext context) {
+
+  return Scaffold(
+      body: Container(
+          child: ListView(
+              children: [
+                CarouselSlider(
+                  items:
+                  [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        image: DecorationImage(
+                          image: NetworkImage("https://img.freepik.com/premium-vector/young-happy-girl-practices-yoga-meditates-pigeon-pose-physical-spiritual-practice-vector-illustration-flat-cartoon-style_173706-45.jpg"),
+
+                        ),
+                      ),
+                      child: Text("Start your yoga journey now"),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        image: DecorationImage(
+                          image: NetworkImage("https://img.freepik.com/premium-vector/workout-cardio-weightlifting-with-personal-gym-coach-woman-training-with-dumbbells-fitness-exercises-active-lifestyle-health-care-wellness-vector-sport-illustration_176516-2459.jpg?w=740"),
+
+                        ),
+                      ),
+                      child: Text("Start your Exercise journey now"),
+                    ),
+
+                    Container(
+                      margin: EdgeInsets.all(10.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.0),
+                        image: DecorationImage(
+                          image: NetworkImage("https://previews.123rf.com/images/jemastock/jemastock1707/jemastock170708641/81882932-rythmic-gymnast-with-ribbon-athlete-sport-avatar-icon-image-vector-illustration-design.jpg"),
+
+                        ),
+                      ),
+                      child: Text("Start your Gymnastics journey now"),
+                    ),
+
+                  ]
+                  ,
+                  options:CarouselOptions(
+                    height: 600.0,
+                    enlargeCenterPage: true,
+                    autoPlay: true,
+                    aspectRatio: 16 / 9,
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enableInfiniteScroll: true,
+                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    viewportFraction: 0.8,
+                  ),
+                ),
+                FloatingActionButton.extended(
+                  heroTag: null,
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.blue,
+
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ExerciseDetails()),
+                    );
+                  }, label: const Text("GET STARTED",style: TextStyle(color: Colors.white),),
+
+                ),
+              ]
+
+          )
+      )
+  );
+}
