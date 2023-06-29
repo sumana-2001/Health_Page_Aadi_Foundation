@@ -40,6 +40,7 @@ dependencies:
   carousel_slider: ^4.0.0
   video_player: ^2.2.18
   flutter_gif: any
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -65,21 +66,9 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/back_bending_pose.jpg
-    - assets/images/child_pose.jpg
-    - assets/images/bridge_pose.jpg
-    - assets/images/pigeon_pose.jpg
-    - assets/images/medition.jpeg
-    - assets/images/cardio_yoga1.jpg
-    - assets/images/gym_avatar.jpeg
-    - assets/images/sense_organs.jpg
-    - assets/images/streching_exercise.png
-    - assets/videos/bridge_pose.mp4
-    - assets/videos/childpose.mp4
-    - assets/videos/pigeon_pose.mp4
-    - assets/images/child_pose.gif
-    - assets/images/pigeon_pose.gif
-    - assets/images/bridge_pose.gif
+    - assets/images/
+    - assets/videos/
+    - assets/test/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
