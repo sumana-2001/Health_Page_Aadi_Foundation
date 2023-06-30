@@ -1,6 +1,7 @@
 import "package:carousel_slider/carousel_slider.dart";
 import "package:flutter/material.dart";
 import "package:smooth_page_indicator/smooth_page_indicator.dart";
+import "package:updated_health_app/components/yoga.dart";
 
 import "YogaPage.dart";
 
@@ -77,37 +78,23 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 height: MediaQuery.of(context).size.height/10 ,
               ),
-              Container(
-                width: 190,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(//background color of button
-                        side: BorderSide(
-                            width:3,
-                            color:Colors.blue), //border width and color
-                        elevation: 3, //elevation of button
-                        shape: RoundedRectangleBorder( //to set border radius to button
-                            borderRadius: BorderRadius.circular(20)
-                        ),
-                        padding: EdgeInsets.all(15) //content padding inside button
-                    ),
-                    onPressed: (){
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => ExerciseDetails()),
-                      );
-                    },
-                    child:  Row(
-                        children: [
-                          Text(
-                              "Get Started",
-                            style: TextStyle(
-                              fontSize: 25
-                            ),
-                          ),
-                          Icon(Icons.arrow_forward)
-                        ],
-                      ),
-                    )
+               FloatingActionButton.extended(
+                  heroTag: null,
+                  backgroundColor: Colors.blue,
+                  foregroundColor: Colors.blue,
+
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => yoga()),
+                    );
+                  }, label: Row(
+                    children: [
+                      const Text("GET STARTED",style: TextStyle(color: Colors.white),),
+                      Icon(Icons.arrow_forward,color: Colors.white,)
+                    ],
+                  ),
+
                 ),
 
             ],
