@@ -2,6 +2,12 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gif/flutter_gif.dart';
 import 'package:video_player/video_player.dart';
+import 'package:collection/collection.dart';
+
+
+//declare Global Variables
+Map<String,String> recommended_flows = {"assets/images/cardio_yoga1.jpg":"Cardio Yoga","assets/images/gym_avatar.jpeg":"Gym Workouts","assets/images/medition.jpeg":"Meditation","assets/images/sense_organs.jpg":"Sense Organ Exercises","assets/images/streching_exercise.png":"Streching Exercises"} ;
+Map<String,String> cards = {"assets/images/back_bending_pose.jpg":"Back Flexion","assets/images/pigeon_pose.jpg":"Pigeon Pose","assets/images/bridge_pose.jpg":"Bridge Pose"};
 
 class ExerciseDetails extends StatefulWidget{
   const ExerciseDetails({super.key});
@@ -11,6 +17,8 @@ class ExerciseDetails extends StatefulWidget{
 }
 
 class ExerciseDetailsState extends State<ExerciseDetails> {
+  int count1 = 0;
+  int count2 = 0;
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -32,9 +40,11 @@ class ExerciseDetailsState extends State<ExerciseDetails> {
       ),
     ]
    ),
-     body: Center(
+     body: SafeArea(
+          child:Center(
        child: ListView(
-       children: [
+         shrinkWrap: true,
+         children: [
          Padding(
            padding: EdgeInsets.all(15.0), // Adjust the padding value as per your requirement
            child:
@@ -42,260 +52,133 @@ class ExerciseDetailsState extends State<ExerciseDetails> {
          ),
          Padding(padding: EdgeInsets.all(10.0),
          child: Text(" What are you going to explore today?",style: TextStyle(fontWeight: FontWeight.bold)),),
-     CarouselSlider(
-         items:
-         [
          Container(
-           width: 10000,
-           child :  Card(
-             clipBehavior: Clip.hardEdge,
-             // backgroundColor: Colors.lightBlueAccent,
 
-             // shape: RoundedRectangleBorder(
-             //   borderRadius: BorderRadius.circular(10000.0),
-             // ),
-             child: InkWell(
-               child: Image.asset(
-               "assets/images/back_bending_pose.jpg",
-               width: 100,
-               height: 700,
-             ),
-             onTap: () {
-           Navigator.push(
-           context,
-           MaterialPageRoute(builder: (context) => Extended()),
-           );
-          }
-          ),
-           ),
-         ),
-
-           Container(
-             width: 10000,
-             child :  Card(
-               clipBehavior: Clip.hardEdge,
-               // backgroundColor: Colors.lightBlueAccent,
-
-               // shape: RoundedRectangleBorder(
-               //   borderRadius: BorderRadius.circular(10000.0),
-               // ),
-               child: InkWell(
-                   child: Image.asset(
-                     "assets/images/child_pose.jpg",
-                     width: 100,
-                     height: 700,
+           child : CarouselSlider.builder(
+               itemCount: cards.length,
+               itemBuilder: (BuildContext context,int index,int pageIndex) =>
+                   Card(
+                     clipBehavior: Clip.hardEdge,
+                     child: InkWell(
+                         child: Image.asset(
+                           cards.keys.elementAt(index),
+                           width: 1000,
+                           height: 200,
+                         ),
+                         onTap: () {
+                           Navigator.push(
+                             context,
+                             MaterialPageRoute(builder: (context) => Extended()),
+                           );
+                         }
+                     ),
                    ),
-                   onTap: () {
-                     Navigator.push(
-                       context,
-                       MaterialPageRoute(builder: (context) => Extended()),
-                     );
-                   }
-               ),
-             ),
-           ),
-
-           Container(
-             width: 10000,
-             child :  Card(
-               clipBehavior: Clip.hardEdge,
-               // backgroundColor: Colors.lightBlueAccent,
-
-               // shape: RoundedRectangleBorder(
-               //   borderRadius: BorderRadius.circular(10000.0),
-               // ),
-               child: InkWell(
-                   child: Image.asset(
-                     "assets/images/bridge_pose.jpg",
-                     width: 100,
-                     height: 700,
-                   ),
-                   onTap: () {
-                     Navigator.push(
-                       context,
-                       MaterialPageRoute(builder: (context) => Extended()),
-                     );
-                   }
-               ),
-             ),
-           ),
-
-           Container(
-             width: 10000,
-             child :  Card(
-               clipBehavior: Clip.hardEdge,
-               // backgroundColor: Colors.lightBlueAccent,
-
-               // shape: RoundedRectangleBorder(
-               //   borderRadius: BorderRadius.circular(10000.0),
-               // ),
-               child: InkWell(
-                   child: Image.asset(
-                     "assets/images/pigeon_pose.jpg",
-                     width: 100,
-                     height: 700,
-                   ),
-                   onTap: () {
-                     Navigator.push(
-                       context,
-                       MaterialPageRoute(builder: (context) => Extended()),
-                     );
-                   }
-               ),
-             ),
-           ),
-
-         ],
          options:CarouselOptions(
+           onPageChanged: (int index, CarouselPageChangedReason reason){
+             setState(() {
+               count1=index;
+             });
+           } ,
            height: 200.0,
            enlargeCenterPage: true,
            autoPlay: true,
-           aspectRatio: 16 / 9,
            autoPlayCurve: Curves.fastOutSlowIn,
            enableInfiniteScroll: true,
            autoPlayAnimationDuration: Duration(milliseconds: 800),
            viewportFraction: 0.9,
          ),
+           ),
+         ),
 
-     ),
          Padding(
            padding: EdgeInsets.all(20.0), // Adjust the padding value as per your requirement
            child:
            Text('Recommended Flows',style: TextStyle(fontWeight: FontWeight.bold,fontStyle: FontStyle.italic,fontSize: 25),),
          ),
+          Container(
+         child : CarouselSlider.builder(
+           itemCount: recommended_flows.length,
+           itemBuilder:(BuildContext context, int item_index , int page_index) => Container(
+             height: 100,
+             // width: MediaQuery.of(context).size.width,
+           child: Stack(
+             alignment: Alignment.center,
+             children : [
+               OutlinedButton(
 
-         CarouselSlider(
-             items: [
-
-               Container(
-                 width: 200,
-                 child:
-
-                     FloatingActionButton.extended(
-                   heroTag: null,
-                   backgroundColor: Colors.white,
-
-                   shape: BeveledRectangleBorder(
-                     side: BorderSide(
-                       color: Colors.red,
-                       width: 1.0,
-                     ),
-                   ),
-                   icon: Image.asset(
-                     "assets/images/cardio_yoga1.jpg",
-                     width: 100,
-                     height: 700,
-                   ),
-                     onPressed:() {}, label: const Text("",style: TextStyle(color: Colors.white),),
+             style: ButtonStyle(
+                 side: MaterialStateProperty.resolveWith<BorderSide>(
+                       (Set<MaterialState> states) {
+                     if (states.contains(MaterialState.disabled)) {
+                       return BorderSide(color: Colors.white);
+                     }
+                     return BorderSide(color: Colors.green);
+                   },
+                 ),
+               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                 RoundedRectangleBorder(
+                   borderRadius: BorderRadius.circular(8.0),
+                 ),
                ),
-               ),
-               Container(
-                   width: 200,
-                   child: FloatingActionButton.extended(
-                     heroTag: null,
-                     backgroundColor: Colors.white,
-
-                     shape: BeveledRectangleBorder(
-                       side: BorderSide(
-                         color: Colors.red,
-                         width: 1.0,
-                       ),
-                     ),
-                     icon: Image.asset(
-                       "assets/images/gym_avatar.jpeg",
-                       width: 100,
-                       height: 700,
-                     ),
-                     onPressed:() {
-                       Navigator.push(
-                         context,
-                         MaterialPageRoute(builder: (context) => GymPage()),
-                       );
-                     }, label: const Text("",style: TextStyle(color: Colors.white),),
-                   )
-               ),
-               Container(
-                   width: 200,
-                   child: FloatingActionButton.extended(
-                     heroTag: null,
-                     backgroundColor: Colors.white,
-
-                     shape: BeveledRectangleBorder(
-                       side: BorderSide(
-                         color: Colors.red,
-                         width: 1.0,
-                       ),
-                     ),
-                     icon: Image.asset(
-                       "assets/images/medition.jpeg",
-                       width: 100,
-                       height: 700,
-                     ),
-                     onPressed:() {}, label: const Text("",style: TextStyle(color: Colors.white),),
-                   )
-               ),
-               Container(
-                   width: 200,
-                   child: FloatingActionButton.extended(
-                     heroTag: null,
-                     backgroundColor: Colors.white,
-
-                     shape: BeveledRectangleBorder(
-                       side: BorderSide(
-                         color: Colors.red,
-                         width: 1.0,
-                       ),
-                     ),
-                     icon: Image.asset(
-                       "assets/images/sense_organs.jpg",
-                       width: 100,
-                       height: 700,
-                     ),
-                     onPressed:() {}, label: const Text("",style: TextStyle(color: Colors.white),),
-                   )
-               ),
-               Container(
-                   width: 200,
-                   child: FloatingActionButton.extended(
-                     heroTag: null,
-                     backgroundColor: Colors.white,
-
-                     shape: BeveledRectangleBorder(
-                       side: BorderSide(
-                         color: Colors.red,
-                         width: 1.0,
-                       ),
-                     ),
-                     icon: Image.asset(
-                       "assets/images/streching_exercise.png",
-                       width: 100,
-                       height: 700,
-                     ),
-                     onPressed:() {
-
-                     }, label: const Text("",style: TextStyle(color: Colors.white),),
-                   )
-               )
-             ],
-             options: CarouselOptions(
-               height: 200.0,
-               enlargeCenterPage: true,
-               autoPlay: true,
-               aspectRatio: 16 / 9,
-               autoPlayCurve: Curves.fastOutSlowIn,
-               enableInfiniteScroll: true,
-               autoPlayAnimationDuration: Duration(milliseconds: 800),
-               viewportFraction: 0.7,
              ),
+             child: Stack(
+               alignment: Alignment.center,
+               children: [
+             Image.asset(
+               recommended_flows.keys.elementAt(item_index),
+               //
+               // width: MediaQuery.of(context).size.width,
+               // height: 1000,
+               fit: BoxFit.fill,
+             ),
+             Positioned(
+               right: 0,
+               bottom:2,
+                 child: Container(
+                 width: 40,
+                 height: 40,
+                 decoration: BoxDecoration(
+                   shape: BoxShape.circle,
+                   border: Border.all(color: Colors.lightBlueAccent),
+                   color: Colors.blue
+                 ),
+                 child : IconButton(
+                     onPressed:() {},
+                     icon: const Icon(Icons.play_arrow,color: Colors.white,)),
+             ),
+             ),
+           ]),
+             onPressed:() {}
+           ),
+          Positioned(
+            bottom: 0,
+              child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 1.0),
+                  color: Colors.white,
+                  child:
+                  Text(recommended_flows.values.elementAt(item_index),style: TextStyle(color: Colors.black))
+          ))]),
+
+           ),
+         options: CarouselOptions(
+             onPageChanged: (int item_index, CarouselPageChangedReason reason){
+                  setState(() {
+                        count2 = item_index;
+                   });
+                  } ,
+             height: 200.0,
+             enlargeCenterPage: true,
+             autoPlay: true,
+             autoPlayCurve: Curves.fastOutSlowIn,
+             enableInfiniteScroll: true,
+             autoPlayAnimationDuration: Duration(milliseconds: 500),
+             viewportFraction: 0.7,
+           ),
          ),
-         Padding(
-           padding: EdgeInsets.all(20.0), // Adjust the padding value as per your requirement
-           child:
-           Text('Continue Flows',style: TextStyle(fontWeight: FontWeight.bold,fontStyle: FontStyle.italic,fontSize: 25),),
-         ),
-       ],
+         )],
        ),
      ),
+   ),
    );
   }
 
