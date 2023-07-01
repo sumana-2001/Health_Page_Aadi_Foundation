@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:updated_health_app/components/MuscleWiki.dart';
 
 class yoga extends StatefulWidget {
   const yoga({super.key});
@@ -91,9 +90,7 @@ class _yogaState extends State<yoga> {
                                         left: 30,
                                         child:FloatingActionButton.small(
                                           backgroundColor: Colors.lightBlue,
-                                            onPressed: (){
-
-                                            },
+                                            onPressed: (){},
                                           child: Icon(Icons.play_arrow),
                                         )
                                     ),
@@ -160,12 +157,8 @@ class _yogaState extends State<yoga> {
                                               height: 30,
                                               width: 30,
                                               child: FloatingActionButton.small(
-                                                  onPressed: (){
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(builder: (context) => musclewiki()),
-                                                    );
-                                                  },
+                                                heroTag: index,
+                                                  onPressed: (){},
                                                 child: Icon(Icons.play_arrow,size: 20,),
                                                 backgroundColor: Colors.lightBlueAccent,
                                                   
@@ -193,6 +186,33 @@ class _yogaState extends State<yoga> {
                               ),
                             ],
                           ),
+                          Container(
+                            width: MediaQuery.of(context).size.width,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: 6,
+                              itemBuilder: (context, index) {
+                                // Generate a random image for demonstration purposes
+                                final randomImageUrl = 'https://media.emailonacid.com/wp-content/uploads/2019/03/2019-GifsInEmail.gif';
+
+                                return InkWell(
+                                  onTap: () {
+                                    // Handle the onTap event here
+                                  },
+                                  child: ListTile(
+                                    leading: Image.network(randomImageUrl), // Random image
+                                    title: Text(
+                                      "name",
+                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                    ),
+                                    subtitle: LinearProgressIndicator(
+                                      value: 0, // Progress value (between 0 and 1)
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          )
                         ],
                       ),
 
