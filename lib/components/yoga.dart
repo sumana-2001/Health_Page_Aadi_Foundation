@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:proste_bezier_curve/proste_bezier_curve.dart';
+import 'package:updated_health_app/components/player.dart';
 
 class yoga extends StatefulWidget {
   const yoga({super.key});
@@ -22,15 +23,22 @@ class _yogaState extends State<yoga> {
           slivers: [
             SliverAppBar(
               backgroundColor: Colors.white,
+              elevation: 0,
               floating: true,
+              snap: true,
               iconTheme: IconThemeData(color: Colors.black),
-              expandedHeight: 100,
+              expandedHeight: 50,
               actions: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Icon(Icons.menu),
+                  padding: EdgeInsets.all(10),
+                  child: IconButton(
+                      color: Colors.black,
+
+                      onPressed: (){},
+                      icon: Icon(Icons.menu,)),
                 )
               ],
+
             ),
             SliverPadding(
               padding: EdgeInsets.zero,
@@ -42,6 +50,18 @@ class _yogaState extends State<yoga> {
                       padding: EdgeInsets.all(5),
                       child: Column(
                         children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20,bottom: 10),
+                                child: CircleAvatar(
+                                  radius: 15,
+                                ),
+                              ),
+                              Spacer(),
+                            ],
+                          ),
                           Row(
                             children: [
                               Padding(
@@ -201,7 +221,10 @@ class _yogaState extends State<yoga> {
 
                                 return InkWell(
                                   onTap: () {
-                                    // Handle the onTap event here
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(builder: (context) => player()),
+                                    );
                                   },
                                   child: ListTile(
                                     leading: Image.network(randomImageUrl), // Random image
