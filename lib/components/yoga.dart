@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:updated_health_app/components/MuscleWiki.dart';
 
 class yoga extends StatefulWidget {
   const yoga({super.key});
@@ -90,7 +91,9 @@ class _yogaState extends State<yoga> {
                                         left: 30,
                                         child:FloatingActionButton.small(
                                           backgroundColor: Colors.lightBlue,
-                                            onPressed: (){},
+                                            onPressed: (){
+
+                                            },
                                           child: Icon(Icons.play_arrow),
                                         )
                                     ),
@@ -157,7 +160,12 @@ class _yogaState extends State<yoga> {
                                               height: 30,
                                               width: 30,
                                               child: FloatingActionButton.small(
-                                                  onPressed: (){},
+                                                  onPressed: (){
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(builder: (context) => musclewiki()),
+                                                    );
+                                                  },
                                                 child: Icon(Icons.play_arrow,size: 20,),
                                                 backgroundColor: Colors.lightBlueAccent,
                                                   
