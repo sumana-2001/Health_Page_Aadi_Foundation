@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 import 'package:updated_health_app/components/yoga.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class player extends StatefulWidget {
   const player({Key? key});
@@ -10,6 +11,7 @@ class player extends StatefulWidget {
 }
 
 class _playerState extends State<player> {
+  int curr_idx = 0;
   bool isHeartBroken = false;
   bool _play = true;
   bool _vol = true;
@@ -51,7 +53,7 @@ class _playerState extends State<player> {
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   double imageSize = constraints.maxWidth *
-                      0.8; // Adjust the size based on your needs
+                      0.9; // Adjust the size based on your needs
                   return Container(
                     width: imageSize,
                     height: imageSize,
@@ -64,6 +66,7 @@ class _playerState extends State<player> {
               ),
             ),
             Expanded(
+              flex: 2,
               child: ClipRRect(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30.0),
@@ -110,12 +113,16 @@ class _playerState extends State<player> {
                             ),
                           ],
                         ),
-                        Text(
+                        Padding(padding: EdgeInsets.only(bottom: 10),
+                        child:Text(
                           "Name of the routine",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 22),
                         ),
-                        ReadMoreText(
+            ),
+                    Padding(
+                       padding: EdgeInsets.only(bottom: 90),
+                       child: ReadMoreText(
                           content,
                           trimLines: 1,
                           trimCollapsedText: " Show More ",
@@ -127,18 +134,40 @@ class _playerState extends State<player> {
                               fontWeight: FontWeight.bold,
                               color: Colors.blueAccent),
                         ),
-                        Text(
+    ),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 5),
+                          child: Text(
                           "Daily Journal",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 22),
                         ),
+                        ),
+                        Expanded(
+                        child : Container(
+                             child: CarouselSlider.builder(
+                                 itemCount: 7,
+                       itemBuilder:
+                      (BuildContext context, int itemIndex, int pageViewIndex) =>
                         ListTile(
-                          leading: Image.network(
-                              "https://media.emailonacid.com/wp-content/uploads/2019/03/2019-GifsInEmail.gif"),
+                          leading: Image.asset("assets/images/bridge_pose.gif"),
+                          // leading: Image.network(
+                          //     "https://media.emailonacid.com/wp-content/uploads/2019/03/2019-GifsInEmail.gif"),
                           title: Text("Name"),
                           subtitle: Text("Subtitle"),
                         ),
-                      ],
+                               options: CarouselOptions(
+                                   onPageChanged:(int index, CarouselPageChangedReason reason){
+                                     setState(() {
+                                       curr_idx=index;
+                                     });
+                                   } ,
+                                   autoPlay: true,
+                                   autoPlayAnimationDuration: Duration(milliseconds: 500),
+                                   scrollDirection: Axis.vertical,
+                                   enableInfiniteScroll: true),
+                             )),
+                        )],
                     ),
                   )),
             ),

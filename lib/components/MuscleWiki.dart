@@ -1,5 +1,10 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
+import 'package:updated_health_app/components/workoutsAPI.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+
 
 //initialize exercise videos
 
@@ -71,7 +76,9 @@ Map<String,String> calves_workout = {"https://media.musclewiki.com/media/uploads
 
 
 
-//while clicking
+
+//images are
+List<String> bodies = ["assets/images/women_front.png","assets/images/man_front.png","assets/images/women_rear.png","assets/images/man_rear.png"];
 class musclewiki extends StatefulWidget {
   const musclewiki({super.key});
 
@@ -80,48 +87,83 @@ class musclewiki extends StatefulWidget {
 }
 
 class _musclewikiState extends State<musclewiki> {
+  late Future<List<dynamic>> data;
+
+  Future<List<dynamic>> fetchExercises() async {
+    final url =
+    Uri.parse("https://musclewiki.p.rapidapi.com/exercises/attributes");
+    final response = await http.get(
+      url,
+      headers: {
+        'X-RapidAPI-Key': 'b5456f97e6msh1dd2f8e51c41572p1fb1e6jsnfba016683d97',
+        'X-RapidAPI-Host': 'musclewiki.p.rapidapi.com'
+      },
+    );
+    var JSONobj = json.decode(response.body);
+    return JSONobj["muscles"];
+  }
+
+  //ExerciseFetcher exerciseFetcher = ExerciseFetcher();
   Color c = Colors.white;
+  int current = 0;
   @override
+  void initState() {
+    super.initState();
+    data = fetchExercises() as Future<List>; // Call fetchExercises() here
+  }
+
+
   Widget build(BuildContext context) {
+    print(data.toString());
          return SafeArea(
              child: Scaffold(
                backgroundColor: Colors.white,
                body: Center(
-                  child: Stack(
+                  child : ListView.builder(
+
+                    shrinkWrap: true,
+
+                    itemCount: bodies.length,
+                    itemBuilder:
+                   (BuildContext context, int itemIndex) =>
+
+                     Stack(
                     alignment: Alignment.center,
                     children: [
+
+                    Image.asset(bodies[itemIndex]
+                          ,fit: BoxFit.contain),
+
                       Positioned(
 
-                        top: 10,
+                        top: 108,
+                        left: 150,
                         child: InkWell(
-                          child: Image.asset("assets/images/head.png",width: 150,height:150),
+                          child: Container(
+                          width: 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.red,
+                          ),
+                        ),
                           onTap: (){
 
                           },
                         )
                       ),
                       Positioned(
-                          left: 30,
-                          top: 110,
-                          child: InkWell(
-                              child: Image.asset("assets/images/shoulder1.png",width: 150,height: 150),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "SHOULDERS EXERCISES",
-                                      Map_Values: shoulders_workout
-                                  ),),);
-
-                            },
-                          )
-                      ),
-                      Positioned(
-                          right: 20,
+                          left: 120,
                           top: 120,
                           child: InkWell(
-                              child: Image.asset("assets/images/shoulder2.png",width: 150,height: 150),
+                              child: Container(
+                                width: 8,
+                                height: 8,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.red,
+                                ),
+                              ),
                             onTap: (){
                               Navigator.push(
                                 context,
@@ -135,9 +177,40 @@ class _musclewikiState extends State<musclewiki> {
                           )
                       ),
                       Positioned(
-                          top: 130,
+                          right: 130,
+                          top: 120,
                           child: InkWell(
-                              child: Image.asset("assets/images/chest.png",width: 150,height: 150),
+                              child: Container(
+                                width: 8,
+                                height: 8,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.red,
+                                ),
+                              ),
+                            onTap: (){
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => Display(
+                                      title: "SHOULDERS EXERCISES",
+                                      Map_Values: shoulders_workout
+                                  ),),);
+
+                            },
+                          )
+                      ),
+                      Positioned(
+                          top: 140,
+                          child: InkWell(
+                              child: Container(
+                                width: 8,
+                                height: 8,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.red,
+                                ),
+                              ),
                               onTap: (){
                                 Navigator.push(
                                   context,
@@ -150,10 +223,17 @@ class _musclewikiState extends State<musclewiki> {
                           )
                       ),
                       Positioned(
-                          top: 190,
-                          left: 25,
+                          top: 170,
+                          left: 100,
                           child: InkWell(
-                            child: Image.asset("assets/images/bicep2.png",width: 80,height: 80),
+                            child: Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                            ),
                             onTap: (){
                               Navigator.push(
                                 context,
@@ -167,10 +247,17 @@ class _musclewikiState extends State<musclewiki> {
                           )
                       ),
                       Positioned(
-                          top: 190,
-                          right: 25,
+                          top: 170,
+                          right: 110,
                           child: InkWell(
-                            child: Image.asset("assets/images/bicep1.png",width: 80,height: 80),
+                            child: Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                            ),
                             onTap: (){
                               Navigator.push(
                                 context,
@@ -184,10 +271,17 @@ class _musclewikiState extends State<musclewiki> {
                           )
                       ),
                       Positioned(
-                          top: 240,
-                          left: -40,
+                          top: 220,
+                          left: 60,
                           child: InkWell(
-                            child: Image.asset("assets/images/hand1.png",width: 120,height: 120),
+                            child: Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                            ),
                             onTap: (){
                               Navigator.push(
                                 context,
@@ -201,10 +295,17 @@ class _musclewikiState extends State<musclewiki> {
                           )
                       ),
                       Positioned(
-                          top: 230,
-                          right: -40,
+                          top: 220,
+                          right: 60,
                           child: InkWell(
-                              child: Image.asset("assets/images/hand2.png",width: 120,height: 120),
+                              child: Container(
+                                width: 8,
+                                height: 8,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: Colors.red,
+                                ),
+                              ),
                               onTap: (){
                                 Navigator.push(
                                   context,
@@ -219,9 +320,16 @@ class _musclewikiState extends State<musclewiki> {
                       ),
                       Positioned(
                           top: 230,
-                          left: 58,
+                          left: 170,
                           child: InkWell(
-                            child: Image.asset("assets/images/obliques2.png",width: 150,height: 180),
+                            child: Container(
+                              width: 10,
+                              height: 10,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                            ),
                             onTap: (){
                               Navigator.push(
                                 context,
@@ -235,10 +343,17 @@ class _musclewikiState extends State<musclewiki> {
                           )
                       ),
                       Positioned(
-                          top: 230,
-                          right: 62,
+                          top: 220,
+                          right: 140,
                           child: InkWell(
-                            child: Image.asset("assets/images/obliques1.png",width: 150,height: 180),
+                            child: Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                            ),
                             onTap: (){
                               Navigator.push(
                                 context,
@@ -252,10 +367,17 @@ class _musclewikiState extends State<musclewiki> {
                           )
                       ),
                       Positioned(
-                          top: 240,
-
+                          top: 220,
+                          left: 140,
                           child: InkWell(
-                            child: Image.asset("assets/images/abdomin.png",width: 200,height: 180),
+                            child: Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                            ),
                             onTap: (){
                               Navigator.push(
                                 context,
@@ -268,12 +390,19 @@ class _musclewikiState extends State<musclewiki> {
                             },
                           )
                       ),
-
+                      //
                       Positioned(
-                          top: 380,
-
+                          top: 350,
+                          left: 140,
                           child: InkWell(
-                            child: Image.asset("assets/images/thighs.png",width: 180,height: 180),
+                            child: Container(
+                              width: 10,
+                              height: 10,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                            ),
                             onTap: (){
                               Navigator.push(
                                 context,
@@ -287,11 +416,18 @@ class _musclewikiState extends State<musclewiki> {
                           )
                       ),
                       Positioned(
-                          top: 550,
-                          left: 60,
+                          top: 470,
+                          left: 120,
                           child: Material(
                               child : InkWell(
-                            child: Image.asset("assets/images/leg1.png",width: 380,height: 200),
+                            child: Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                            ),
                             splashColor: c,
                             onTap: (){
                               setState(() {
@@ -310,10 +446,17 @@ class _musclewikiState extends State<musclewiki> {
                           )
                       ),
                       Positioned(
-                          top: 550,
-                          right:50,
+                          top: 470,
+                          right:120,
                           child: InkWell(
-                            child: Image.asset("assets/images/leg2.png",width: 380,height: 200),
+                            child: Container(
+                              width: 8,
+                              height: 8,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.red,
+                              ),
+                            ),
                             onTap: (){
                               Navigator.push(
                                 context,
@@ -327,10 +470,25 @@ class _musclewikiState extends State<musclewiki> {
                           )
                       ),
                     ],
-                  ),
-               ),
-             )
+
+                  // ),options: CarouselOptions(
+                  //         onPageChanged:(int index, CarouselPageChangedReason reason){
+                  //           setState(() {
+                  //             current = index;
+                  //           });
+                  //         } ,
+                  //         autoPlay: true,
+                  //         scrollDirection: Axis.horizontal,
+                  //         enableInfiniteScroll: true),
+                  //     )),
+               )
+    )
+    )
+    )
          );
+
+
+
   }
 
 }
@@ -357,6 +515,7 @@ class _DisplayState extends State<Display> {
   late Duration _currentPosition = Duration.zero;
   late Duration _totalDuration = Duration.zero;
   String inkwell = "";
+  String information = "Instructions are provided here";
   int currentVideoIndex = 0;
   late int count;
 
@@ -368,7 +527,8 @@ class _DisplayState extends State<Display> {
 
   void _initializeVideoController() {
     count = widget.Map_Values.length;
-    _videoController = VideoPlayerController.network(widget.Map_Values.keys.elementAt(currentVideoIndex))
+    _videoController = VideoPlayerController.network(
+        widget.Map_Values.keys.elementAt(currentVideoIndex))
       ..addListener(() {
         setState(() {
           _currentPosition = _videoController.value.position;
@@ -406,24 +566,25 @@ class _DisplayState extends State<Display> {
     });
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: _videoController.value.isInitialized
             ? Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Text(widget.title,style: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 24.0,
             ),) ,
-          Padding(padding: EdgeInsets.all(2.0),
-            child : Text(widget.Map_Values.values.elementAt(currentVideoIndex),
-            style: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 12.0,
-          ),)),
+            Padding(padding: EdgeInsets.all(2.0),
+                child : Text(widget.Map_Values.values.elementAt(currentVideoIndex),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12.0,
+                  ),)),
             AspectRatio(
               aspectRatio: _videoController.value.aspectRatio,
               child: VideoPlayer(_videoController),
@@ -443,8 +604,24 @@ class _DisplayState extends State<Display> {
                 color: Colors.white,
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(2.0),
                     child: Text(inkwell),
+                  ),
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                setState(() {
+                  information = 'check for more details';
+                });
+              },
+              child: Container(
+                color: Colors.white,
+                child: Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(2.0),
+                    child: Text(information),
                   ),
                 ),
               ),
@@ -469,53 +646,3 @@ class _DisplayState extends State<Display> {
     );
   }
 }
-
-  // @override
-  // Widget build(BuildContext context) {
-  //   return Scaffold(
-  //     body: Center(
-  //       child: _videoController.value.isInitialized
-  //           ? Column(
-  //         mainAxisAlignment: MainAxisAlignment.center,
-  //         children: [
-  //           Text(widget.Map_Values.values.elementAt(0)),
-  //           AspectRatio(
-  //             aspectRatio: _videoController.value.aspectRatio,
-  //             child: VideoPlayer(_videoController),
-  //           ),
-  //           InkWell(
-  //             onTap: (){
-  //               setState(() {
-  //                 inkwell = 'Current position: ${_currentPosition.toString()}';
-  //               });
-  //             },
-  //             onDoubleTap: (){
-  //               'Total Duration: ${_totalDuration.toString()}';
-  //             },
-  //             child:Container(
-  //               color: Colors.green,
-  //
-  //               child: Center(
-  //                 child: Padding(
-  //                   padding: const EdgeInsets.all(8.0),
-  //                   child:Text(
-  //                       inkwell
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //
-  //         ],
-  //       )
-  //           : CircularProgressIndicator(),
-  //     ),
-  //     floatingActionButton: FloatingActionButton(
-  //       onPressed: _togglePlay,
-  //       child: Icon(
-  //         _isPlaying ? Icons.pause : Icons.play_arrow,
-  //       ),
-  //     ),
-  //   );
-  // }
-
