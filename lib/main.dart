@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
-import 'package:flutter/services.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:updated_health_app/components/YogaPage.dart';
-
 import 'components/HomePage.dart';
 
 

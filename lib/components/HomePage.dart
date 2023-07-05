@@ -3,7 +3,6 @@ import "package:flutter/material.dart";
 import "package:smooth_page_indicator/smooth_page_indicator.dart";
 import "package:updated_health_app/components/yoga.dart";
 
-import "YogaPage.dart";
 
 class MyHomePage extends StatefulWidget {
   final String title;

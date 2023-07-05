@@ -113,61 +113,66 @@ class _playerState extends State<player> {
                             ),
                           ],
                         ),
-                        Padding(padding: EdgeInsets.only(bottom: 10),
-                        child:Text(
-                          "Name of the routine",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 22),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: Text(
+                            "Name of the routine",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 22),
+                          ),
                         ),
-            ),
-                    Padding(
-                       padding: EdgeInsets.only(bottom: 90),
-                       child: ReadMoreText(
-                          content,
-                          trimLines: 1,
-                          trimCollapsedText: " Show More ",
-                          trimExpandedText: " Show less ",
-                          lessStyle: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blueAccent),
-                          moreStyle: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blueAccent),
+                        Padding(
+                          padding: EdgeInsets.only(bottom: 90),
+                          child: ReadMoreText(
+                            content,
+                            trimLines: 1,
+                            trimCollapsedText: " Show More ",
+                            trimExpandedText: " Show less ",
+                            lessStyle: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blueAccent),
+                            moreStyle: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.blueAccent),
+                          ),
                         ),
-    ),
                         Padding(
                           padding: EdgeInsets.only(bottom: 5),
                           child: Text(
-                          "Daily Journal",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 22),
-                        ),
+                            "Daily Journal",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 22),
+                          ),
                         ),
                         Expanded(
-                        child : Container(
-                             child: CarouselSlider.builder(
-                                 itemCount: 7,
-                       itemBuilder:
-                      (BuildContext context, int itemIndex, int pageViewIndex) =>
-                        ListTile(
-                          leading: Image.asset("assets/images/bridge_pose.gif"),
-                          // leading: Image.network(
-                          //     "https://media.emailonacid.com/wp-content/uploads/2019/03/2019-GifsInEmail.gif"),
-                          title: Text("Name"),
-                          subtitle: Text("Subtitle"),
-                        ),
-                               options: CarouselOptions(
-                                   onPageChanged:(int index, CarouselPageChangedReason reason){
-                                     setState(() {
-                                       curr_idx=index;
-                                     });
-                                   } ,
-                                   autoPlay: true,
-                                   autoPlayAnimationDuration: Duration(milliseconds: 500),
-                                   scrollDirection: Axis.vertical,
-                                   enableInfiniteScroll: true),
-                             )),
-                        )],
+                          child: Container(
+                              child: CarouselSlider.builder(
+                            itemCount: 7,
+                            itemBuilder: (BuildContext context, int itemIndex,
+                                    int pageViewIndex) =>
+                                ListTile(
+                              leading:
+                                  Image.asset("assets/images/bridge_pose.gif"),
+                              // leading: Image.network(
+                              //     "https://media.emailonacid.com/wp-content/uploads/2019/03/2019-GifsInEmail.gif"),
+                              title: Text("Name"),
+                              subtitle: Text("Subtitle"),
+                            ),
+                            options: CarouselOptions(
+                                onPageChanged: (int index,
+                                    CarouselPageChangedReason reason) {
+                                  setState(() {
+                                    curr_idx = index;
+                                  });
+                                },
+                                autoPlay: true,
+                                autoPlayAnimationDuration:
+                                    Duration(milliseconds: 500),
+                                scrollDirection: Axis.vertical,
+                                enableInfiniteScroll: true),
+                          )),
+                        )
+                      ],
                     ),
                   )),
             ),
