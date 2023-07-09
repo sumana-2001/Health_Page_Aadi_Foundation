@@ -12,6 +12,7 @@ class player extends StatefulWidget {
 
 class _playerState extends State<player> {
   int curr_idx = 0;
+  double _currVal = 0;
   bool isHeartBroken = false;
   bool _play = true;
   bool _vol = true;
@@ -84,11 +85,21 @@ class _playerState extends State<player> {
                         Center(
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width / 1.1,
-                            child: LinearProgressIndicator(
-                              value: 50,
-                            ),
+                            // child: LinearProgressIndicator(
+                            //   value: 50,
+                            // ),
                           ),
                         ),
+                        Text(_currVal.toString(),style: TextStyle(fontSize: 12),),
+                        Slider(value: _currVal,
+                            label: _currVal.toString(),
+                            activeColor: Colors.blue,
+                            thumbColor: Colors.white,
+                            onChanged:(value){
+                              setState(() {
+                                _currVal = value;
+                              });
+                            }),
                         Row(
                           children: [
                             IconButton(
@@ -121,7 +132,7 @@ class _playerState extends State<player> {
                         ),
             ),
                     Padding(
-                       padding: EdgeInsets.only(bottom: 90),
+                       padding: EdgeInsets.only(bottom: 60),
                        child: ReadMoreText(
                           content,
                           trimLines: 1,

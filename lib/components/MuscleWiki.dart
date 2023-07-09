@@ -1,81 +1,31 @@
+import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:readmore/readmore.dart';
+import 'package:updated_health_app/components/yoga.dart';
 import 'package:video_player/video_player.dart';
 import 'package:updated_health_app/components/workoutsAPI.dart';
 import 'dart:convert';
+import 'package:chewie/chewie.dart';
 import 'package:http/http.dart' as http;
+import 'package:updated_health_app/models/classAPI.dart';
+import 'package:updated_health_app/models/detailsAPI.dart';
 
 
-//initialize exercise videos
-
-//while clicking shoulders
-Map<String,String> shoulders_workout = {"https://media.musclewiki.com/media/uploads/videos/branded/female-shoulders-stretch-variation-1-front.mp4#t=0.1":"Shoulders Stretch Variation One Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-shoulders-stretch-variation-1-side.mp4#t=0.1":"Shoulders Stretch Variation One Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-shoulders-stretch-variation-2-front.mp4#t=0.1":"Shoulders Stretch Variation Three Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-shoulders-stretch-variation-2-side.mp4#t=0.1":"Shoulders Stretch Variation Three Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-shoulders-stretch-variation-3-front.mp4#t=0.1":"Shoulders Stretch Variation Four Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-shoulders-stretch-variation-3-side.mp4#t=0.1":"Shoulders Stretch Variation Four Side Angle"};
-
-
-//while clicking chest
-Map<String,String> chest_workouts = {"https://media.musclewiki.com/media/uploads/videos/branded/female-barbell-bench-press-front.mp4#t=0.1":"Barbell Bench Press Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-barbell-bench-press-side.mp4#t=0.1":"Barbell Bench Press Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-bodyweight-pushup-front.mp4#t=0.1":"Push Up Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-bodyweight-pushup-side.mp4#t=0.1":"Push Up Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-dumbbell-incline-bench-press-front_ctz2966.mp4#t=0.1":"Dumbbell Incline Bench Press Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-dumbbell-incline-bench-press-side_cQCX9or.mp4#t=0.1":"Dumbbell Incline Bench Press Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-dumbbell-incline-chest-flys-front.mp4#t=0.1":"Dumbbell Incline Chest Flys Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-dumbbell-incline-chest-flys-side.mp4#t=0.1":"Dumbbell Incline Chest Flys Side Angle",
-  };
-
-//while clicking biceps
-Map<String,String> biceps_workout = {"https://media.musclewiki.com/media/uploads/videos/branded/female-biceps-stretch-variation-1-front.mp4#t=0.1":"Biceps Stretch Variation One Side Angle",
-                                      "https://media.musclewiki.com/media/uploads/videos/branded/female-biceps-stretch-variation-1-side.mp4":"Biceps Stretch Variation One Front Angle",
-                                      "https://media.musclewiki.com/media/uploads/videos/branded/female-biceps-stretch-variation-3-front.mp4#t=0.1":"Biceps Stretch Variation Two Front Angle",
-                                      "https://media.musclewiki.com/media/uploads/videos/branded/female-biceps-stretch-variation-3-side.mp4":"Biceps Stretch Variation Two Side Angle",
-                                      "https://media.musclewiki.com/media/uploads/videos/branded/female-biceps-stretch-variation-4-front.mp4#t=0.1":"Biceps Stretch Variation Three Front Angle",
-                                      "https://media.musclewiki.com/media/uploads/videos/branded/female-biceps-stretch-variation-4-side.mp4#t=0.1":"Biceps Stretch Variation Three Front Angle"
-};
-
-//while clicking hands
-Map<String,String> hands_workout = {"https://media.musclewiki.com/media/uploads/videos/branded/female-forearm-stretch-variation-1-front.mp4#t=0.1":"Forearms Stretch Variation One Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-forearms-stretch-variation-1-side.mp4":"Forearms Stretch Variation One Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-forearms-stretch-variation-3-front.mp4#t=0.1":"Forearms Stretch Variation Two Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-forearms-stretch-variation-3-side.mp4":"Forearms Stretch Variation Two Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-forearms-stretch-variation-4-front.mp4#t=0.1":"Forearms Stretch Variation Three Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-forearms-stretch-variation-4-side.mp4#t=0.1":"Forearms Stretch Variation Three Front Angle"
-};
-
-//while clicking abdominals
-Map<String,String> oblique_workout = {"https://media.musclewiki.com/media/uploads/videos/branded/female-abdominals-stretch-variation-2-front.mp4#t=0.1":"Abdominals Stretch Variation Two Front Angle",
-                                      "https://media.musclewiki.com/media/uploads/videos/branded/female-abdominals-stretch-variation-2-side.mp4#t=0.1":"Abdominals Stretch Variation Two Side Angle",
-                                      "https://media.musclewiki.com/media/uploads/videos/branded/female-abdominals-stretch-variation-3-front.mp4#t=0.1":"Abdominals Stretch Variation Three Front Angle",
-                                      "https://media.musclewiki.com/media/uploads/videos/branded/female-abdominals-stretch-variation-3-side.mp4#t=0.1":"Abdominals Stretch Variation Three Side Angle",
-                                       "https://media.musclewiki.com/media/uploads/videos/branded/female-abdominals-stretch-variation-4-front.mp4#t=0.1":"Abdominals Stretch Variation Four Front Angle",
-                                       "https://media.musclewiki.com/media/uploads/videos/branded/female-abdominals-stretch-variation-4-side.mp4#t=0.1":"Abdominals Stretch Variation Four Side Angle"};
-
-
-
-//while clicking thighs
-Map<String,String> thighs_workout = {"https://media.musclewiki.com/media/uploads/videos/branded/female-quads-stretch-variation-1-front.mp4#t=0.1":"Quads Stretch Variation One Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-quads-stretch-variation-1-side.mp4#t=0.1":"Quads Stretch Variation One Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-quads-stretch-variation-2-front.mp4#t=0.1":"Quads Stretch Variation Three Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-quads-stretch-variation-2-side.mp4#t=0.1":"Quads Stretch Variation Three Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-quads-stretch-variation-3-front.mp4#t=0.1":"Quads Stretch Variation Four Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-quads-stretch-variation-3-side.mp4#t=0.1":"Quads Stretch Variation Four Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-quads-stretch-variation-4-front.mp4#t=0.1":"Quads Stretch Variation Four Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-quads-stretch-variation-4-side.mp4#t=0.1":"Quads Stretch Variation Four Side Angle"};
-
-//while clicking Calves
-Map<String,String> calves_workout = {"https://media.musclewiki.com/media/uploads/videos/branded/female-calves-stretch-variation-1-front.mp4#t=0.1":"Calves Stretch Variation One Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-calves-stretch-variation-1-side.mp4#t=0.1":"Calves Stretch Variation One Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-calves-stretch-variation-2-front.mp4#t=0.1":"Calves Stretch Variation Three Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-calves-stretch-variation-2-side.mp4#t=0.1":"Calves Stretch Variation Three Side Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-calves-stretch-variation-3-front.mp4#t=0.1":"Calves Stretch Variation Four Front Angle",
-  "https://media.musclewiki.com/media/uploads/videos/branded/female-calves-stretch-variation-3-side.mp4#t=0.1":"Calves Stretch Variation Four Side Angle"};
-
-
-
+Future<List<dynamic>> fetchExerciseDetails() async {
+  final url =
+  Uri.parse("https://musclewiki.p.rapidapi.com/exercises");
+  final response = await http.get(
+    url,
+    headers: {
+      'X-RapidAPI-Key': 'b5456f97e6msh1dd2f8e51c41572p1fb1e6jsnfba016683d97',
+      'X-RapidAPI-Host': 'musclewiki.p.rapidapi.com'
+    },
+  );
+  var JSONobj = json.decode(response.body);
+  return JSONobj;
+}
 
 //images are
 List<String> bodies = ["assets/images/women_front.png","assets/images/man_front.png","assets/images/women_rear.png","assets/images/man_rear.png"];
@@ -87,21 +37,6 @@ class musclewiki extends StatefulWidget {
 }
 
 class _musclewikiState extends State<musclewiki> {
-  late Future<List<dynamic>> data;
-
-  Future<List<dynamic>> fetchExercises() async {
-    final url =
-    Uri.parse("https://musclewiki.p.rapidapi.com/exercises/attributes");
-    final response = await http.get(
-      url,
-      headers: {
-        'X-RapidAPI-Key': 'b5456f97e6msh1dd2f8e51c41572p1fb1e6jsnfba016683d97',
-        'X-RapidAPI-Host': 'musclewiki.p.rapidapi.com'
-      },
-    );
-    var JSONobj = json.decode(response.body);
-    return JSONobj["muscles"];
-  }
 
   //ExerciseFetcher exerciseFetcher = ExerciseFetcher();
   Color c = Colors.white;
@@ -109,12 +44,10 @@ class _musclewikiState extends State<musclewiki> {
   @override
   void initState() {
     super.initState();
-    data = fetchExercises() as Future<List>; // Call fetchExercises() here
   }
 
 
   Widget build(BuildContext context) {
-    print(data.toString());
          return SafeArea(
              child: Scaffold(
                backgroundColor: Colors.white,
@@ -168,10 +101,11 @@ class _musclewikiState extends State<musclewiki> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "SHOULDERS EXERCISES",
-                                      Map_Values: shoulders_workout
-                                  ),),);
+                                  builder: (_) => Fetch(
+                                      name: "Shoulders"
+                                  )
+                                ),
+                              );
 
                             },
                           )
@@ -192,10 +126,10 @@ class _musclewikiState extends State<musclewiki> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "SHOULDERS EXERCISES",
-                                      Map_Values: shoulders_workout
-                                  ),),);
+                                    builder: (_) => Fetch(
+                                        name: "Shoulders"
+                                    )
+                                ),);
 
                             },
                           )
@@ -215,10 +149,10 @@ class _musclewikiState extends State<musclewiki> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => Display(
-                                      title: "CHEST EXERCISES",
-                                      Map_Values: chest_workouts
-                                    ),),);
+                                      builder: (_) => Fetch(
+                                          name: "Chest"
+                                      )
+                                  ),);
                               },
                           )
                       ),
@@ -238,10 +172,10 @@ class _musclewikiState extends State<musclewiki> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "BICEPS EXERCISES",
-                                      Map_Values: biceps_workout
-                                  ),),);
+                                    builder: (_) => Fetch(
+                                        name: "Biceps"
+                                    )
+                                ),);
 
                             },
                           )
@@ -262,10 +196,10 @@ class _musclewikiState extends State<musclewiki> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "BICEPS EXERCISES",
-                                      Map_Values: biceps_workout
-                                  ),),);
+                                    builder: (_) => Fetch(
+                                        name: "Biceps"
+                                    )
+                                ),);
 
                             },
                           )
@@ -286,10 +220,10 @@ class _musclewikiState extends State<musclewiki> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "HAND EXERCISES",
-                                      Map_Values: hands_workout
-                                  ),),);
+                                    builder: (_) => Fetch(
+                                        name: "Forearms"
+                                    )
+                                ),);
 
                             },
                           )
@@ -310,10 +244,10 @@ class _musclewikiState extends State<musclewiki> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (_) => Display(
-                                        title: "HAND EXERCISES",
-                                        Map_Values: hands_workout
-                                    ),),);
+                                      builder: (_) => Fetch(
+                                          name: "Forearms"
+                                      )
+                                  ),);
 
                               },
                           )
@@ -334,10 +268,10 @@ class _musclewikiState extends State<musclewiki> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "ABDOMEN EXERCISES",
-                                      Map_Values: chest_workouts
-                                  ),),);
+                                    builder: (_) => Fetch(
+                                        name: "Abdominals"
+                                    )
+                                ),);
 
                             },
                           )
@@ -358,10 +292,10 @@ class _musclewikiState extends State<musclewiki> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "ABDOMEN EXERCISES",
-                                      Map_Values: chest_workouts
-                                  ),),);
+                                    builder: (_) => Fetch(
+                                        name: "Abdominals"
+                                    )
+                                ),);
 
                             },
                           )
@@ -382,10 +316,10 @@ class _musclewikiState extends State<musclewiki> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "ABDOMEN EXERCISES",
-                                      Map_Values: chest_workouts
-                                  ),),);
+                                    builder: (_) => Fetch(
+                                        name: "Abdominals"
+                                    )
+                                ),);
 
                             },
                           )
@@ -407,10 +341,10 @@ class _musclewikiState extends State<musclewiki> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "THIGHS EXERCISES",
-                                      Map_Values: thighs_workout
-                                  ),),);
+                                    builder: (_) => Fetch(
+                                        name: "Quads"
+                                    )
+                                ),);
 
                             },
                           )
@@ -436,10 +370,10 @@ class _musclewikiState extends State<musclewiki> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "LEG EXERCISES",
-                                      Map_Values: calves_workout
-                                  ),),);
+                                    builder: (_) => Fetch(
+                                        name: "Quads"
+                                    )
+                                ),);
 
                             },
                           )
@@ -461,10 +395,10 @@ class _musclewikiState extends State<musclewiki> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => Display(
-                                      title: "CALVES EXERCISES",
-                                      Map_Values: calves_workout
-                                  ),),);
+                                    builder: (_) => Fetch(
+                                        name: "Calves"
+                                    )
+                                ),);
 
                             },
                           )
@@ -494,12 +428,134 @@ class _musclewikiState extends State<musclewiki> {
 }
 
 
+class Fetch extends StatefulWidget{
+  String name;
+  Fetch({Key? key, required this.name}) : super(key: key);
+
+  @override
+  _FetchDetails createState() => _FetchDetails();
+}
+
+class _FetchDetails extends State<Fetch>{
+  late Future<Attributes> futureAttribute;
+  late Future<List<dynamic>> futureDetails;
+  late VideoPlayerController _videoPlayerController;
+  late ChewieController _chewieController;
+  @override
+  void initState() {
+    super.initState();
+    futureDetails = fetchExerciseDetails() as Future<List>;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: FutureBuilder<List<dynamic>>(
+        future: futureDetails,
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot){
+        if (snapshot.hasData){
+          List<dynamic> details = List.from(snapshot.data);
+          List<dynamic> result = [];
+          //segregate the data according to body parts
+          for(var jsonobj in details) {
+            int num = jsonobj['target'].length;
+            switch(num){
+              case 1:
+                if(jsonobj['target']['Primary'].contains(widget.name)){
+                  result.add(jsonobj);
+                }
+                break;
+
+              case 2:
+                if(jsonobj['target']['Primary'].contains(widget.name) || jsonobj['target']['Secondary'].contains(widget.name)){
+                  result.add(jsonobj);
+                }
+                break;
+              case 3:
+                if(jsonobj['target']['Primary'].contains(widget.name) || jsonobj['target']['Secondary'].contains(widget.name) || jsonobj['target']['Tertiary'].contains(widget.name)){
+                  result.add(jsonobj);
+                }
+                break;
+              default:
+                result.add(jsonobj);
+                break;
+            }
+          }
+
+          return ListView.builder(
+              itemCount: result.length,
+              itemBuilder: (BuildContext context,int index){
+                //setting video URLS
+                Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
+                Map<String,String> Map_values = {};
+                int param = 0;
+                for(var value in videoURLS){
+                  Map_values[param.toString()] = value.toString().substring(0,value.toString().length - 6);
+                  param++;
+                }
+
+                //setting instructions
+                List<dynamic> instructions = result[index]['steps'].toList();
+                List<String> Steps = [];
+                for(var value in instructions){
+                  Steps.add(value.toString());
+                }
+                return GestureDetector(
+                  onTap: (){
+                    Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Display(
+                          title: result[index]['exercise_name'],
+                          Map_Values: Map_values,
+                          Category: result[index]['Category'],
+                          Difficulty: result[index]['Difficulty'],
+                          Exercise_Name: result[index]['exercise_name'],
+                          Steps: Steps
+                      ),));
+                  },
+                  child: Card(
+                    elevation: 10,
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 10,horizontal: 10
+                      ),
+                      child: Text(result[index]['exercise_name']),
+                    ),
+                  )
+                );
+              }
+          );
+        }
+        else{
+          return Center(
+              child: CircularProgressIndicator()
+          );
+        }
+      },
+      )
+    );
+  }
+
+}
+
+
+
 class Display extends StatefulWidget {
   final Map<String, String> Map_Values;
-  String title;
+  final String title;
+  final String Category;
+  final String Difficulty;
+  final String Exercise_Name;
+  final List<String> Steps;
 
-
-  Display({Key? key, required this.title, required this.Map_Values})
+  Display({Key? key,
+    required this.title,
+    required this.Map_Values,
+    required this.Category,
+    required this.Difficulty,
+    required this.Exercise_Name,
+    required this.Steps})
       : super(key: key);
 
 
@@ -512,12 +568,15 @@ class _DisplayState extends State<Display> {
 
   late VideoPlayerController _videoController;
   late bool _isPlaying = false;
+  late bool _vol = false;
   late Duration _currentPosition = Duration.zero;
   late Duration _totalDuration = Duration.zero;
   String inkwell = "";
   String information = "Instructions are provided here";
   int currentVideoIndex = 0;
   late int count;
+  bool isHeartBroken = false;
+
 
   @override
   void initState() {
@@ -528,7 +587,7 @@ class _DisplayState extends State<Display> {
   void _initializeVideoController() {
     count = widget.Map_Values.length;
     _videoController = VideoPlayerController.network(
-        widget.Map_Values.keys.elementAt(currentVideoIndex))
+        widget.Map_Values.values.elementAt(currentVideoIndex))
       ..addListener(() {
         setState(() {
           _currentPosition = _videoController.value.position;
@@ -569,80 +628,132 @@ class _DisplayState extends State<Display> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: _videoController.value.isInitialized
-            ? Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Text(widget.title,style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 24.0,
-            ),) ,
-            Padding(padding: EdgeInsets.all(2.0),
-                child : Text(widget.Map_Values.values.elementAt(currentVideoIndex),
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 12.0,
-                  ),)),
-            AspectRatio(
-              aspectRatio: _videoController.value.aspectRatio,
-              child: VideoPlayer(_videoController),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  inkwell = 'Current position: ${_currentPosition.toString()}';
-                });
-              },
-              onDoubleTap: () {
-                setState(() {
-                  inkwell = 'Total Duration: ${_totalDuration.toString()}';
-                });
-              },
-              child: Container(
-                color: Colors.white,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: Text(inkwell),
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                setState(() {
-                  information = 'check for more details';
-                });
-              },
-              child: Container(
-                color: Colors.white,
-                child: Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: Text(information),
-                  ),
-                ),
-              ),
-            ),
-          ],
-        )
-            : CircularProgressIndicator(),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _togglePlay,
-        child: Icon(
-          _isPlaying ? Icons.pause : Icons.play_arrow,
+    return SafeArea(
+        child: Scaffold(
+          backgroundColor: Colors.white,
+        body: Column(
+        children: [
+        Row(
+        children: [
+        IconButton(
+        onPressed: () {
+        Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => yoga()),
+        );
+        },
+          icon: Icon(Icons.arrow_back),
         ),
+      Spacer(),
+      Spacer(),
+      IconButton(
+        onPressed: () {
+          setState(() {
+            isHeartBroken = !isHeartBroken;
+          });
+        },
+        icon: isHeartBroken
+            ? Icon(Icons.favorite)
+            : Icon(Icons.favorite_border),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      bottomNavigationBar: BottomAppBar(
-        child: IconButton(
-          onPressed: _changeVideo,
-          icon: Icon(Icons.skip_next),
+      ],
+    ),
+    Expanded(
+    child: LayoutBuilder(
+    builder: (BuildContext context, BoxConstraints constraints) {
+    return Container(
+    child:  AspectRatio(
+         aspectRatio: _videoController.value.aspectRatio,
+         child: VideoPlayer(_videoController),
+    ),
+    );
+    },
+    ),
+    ),
+    Expanded(
+    flex: 2,
+    child: ClipRRect(
+
+    borderRadius: BorderRadius.only(
+    topLeft: Radius.circular(30.0),
+    topRight: Radius.circular(30.0),
+    ),
+      child: Container(
+
+        padding: EdgeInsets.all(10),
+        color: Color(0xFFD3F9FA),
+         child: Column(
+           children: [
+             Text(widget.title,style: TextStyle(
+               fontWeight: FontWeight.bold,
+               fontSize: 24.0,
+             ),),
+             // Text(_currentPosition.toString(),style: TextStyle(fontSize: 12),),
+             Slider(value: _currentPosition.inMilliseconds.toDouble(),
+                 min: 0,
+                 max: _totalDuration.inMilliseconds.toDouble(),
+                 label: _currentPosition.toString(),
+                 activeColor: Colors.blue,
+                 thumbColor: Colors.white,
+                 onChanged:(value){
+                   Duration newPosition = Duration(milliseconds: value.toInt());
+    _videoController.seekTo(newPosition).then((_) {
+                     setState(() {
+                       _currentPosition = newPosition;
+                     });
+                   });
+                 }),
+            Row(
+             children : [
+               IconButton(
+                 onPressed: _togglePlay,
+                 icon: Icon(
+                   _isPlaying ? Icons.pause : Icons.play_arrow,
+                 ),
+               ),
+               IconButton(
+                 onPressed: () {
+                   setState(() {
+                     _vol = !_vol;
+                   });
+                 },
+                 icon: _vol
+                     ? Icon(Icons.volume_up)
+                     : Icon(Icons.volume_off),
+               ),
+              IconButton(
+                 onPressed: _changeVideo,
+                 icon: Icon(Icons.skip_next),
+               ),
+
+               ]
+            ),
+        Padding(padding: EdgeInsets.only(bottom: 0),
+          child:Text(
+            "INSTRUCTIONS",
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 22),
+          ),
         ),
-      ),
+    Expanded(
+    child : Container(
+    child: ListView.builder(
+      itemCount: widget.Steps.length,
+    itemBuilder: (BuildContext context, int index){
+      return Padding(padding: EdgeInsets.all(5),child:Text(widget.Steps[index],style: TextStyle(fontSize: 16,fontStyle: FontStyle.italic,fontWeight: FontWeight.w500),));
+    }
+    )
+
+    )
+    )
+           ],
+    ),
+    ),
+    )
+    )
+    ]
+    )
+    )
     );
   }
 }
