@@ -12,6 +12,7 @@ class player extends StatefulWidget {
 
 class _playerState extends State<player> {
   int curr_idx = 0;
+  double _currVal = 0;
   bool isHeartBroken = false;
   bool _play = true;
   bool _vol = true;
@@ -84,11 +85,21 @@ class _playerState extends State<player> {
                         Center(
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width / 1.1,
-                            child: LinearProgressIndicator(
-                              value: 50,
-                            ),
+                            // child: LinearProgressIndicator(
+                            //   value: 50,
+                            // ),
                           ),
                         ),
+                        Text(_currVal.toString(),style: TextStyle(fontSize: 12),),
+                        Slider(value: _currVal,
+                            label: _currVal.toString(),
+                            activeColor: Colors.blue,
+                            thumbColor: Colors.white,
+                            onChanged:(value){
+                              setState(() {
+                                _currVal = value;
+                              });
+                            }),
                         Row(
                           children: [
                             IconButton(
@@ -113,16 +124,15 @@ class _playerState extends State<player> {
                             ),
                           ],
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 10),
-                          child: Text(
+                        Padding(padding: EdgeInsets.only(bottom: 10),
+                          child:Text(
                             "Name of the routine",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 22),
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(bottom: 90),
+                          padding: EdgeInsets.only(bottom: 60),
                           child: ReadMoreText(
                             content,
                             trimLines: 1,
@@ -145,34 +155,30 @@ class _playerState extends State<player> {
                           ),
                         ),
                         Expanded(
-                          child: Container(
+                          child : Container(
                               child: CarouselSlider.builder(
-                            itemCount: 7,
-                            itemBuilder: (BuildContext context, int itemIndex,
-                                    int pageViewIndex) =>
-                                ListTile(
-                              leading:
-                                  Image.asset("assets/images/bridge_pose.gif"),
-                              // leading: Image.network(
-                              //     "https://media.emailonacid.com/wp-content/uploads/2019/03/2019-GifsInEmail.gif"),
-                              title: Text("Name"),
-                              subtitle: Text("Subtitle"),
-                            ),
-                            options: CarouselOptions(
-                                onPageChanged: (int index,
-                                    CarouselPageChangedReason reason) {
-                                  setState(() {
-                                    curr_idx = index;
-                                  });
-                                },
-                                autoPlay: true,
-                                autoPlayAnimationDuration:
-                                    Duration(milliseconds: 500),
-                                scrollDirection: Axis.vertical,
-                                enableInfiniteScroll: true),
-                          )),
-                        )
-                      ],
+                                itemCount: 7,
+                                itemBuilder:
+                                    (BuildContext context, int itemIndex, int pageViewIndex) =>
+                                    ListTile(
+                                      leading: Image.asset("assets/images/bridge_pose.gif"),
+                                      // leading: Image.network(
+                                      //     "https://media.emailonacid.com/wp-content/uploads/2019/03/2019-GifsInEmail.gif"),
+                                      title: Text("Name"),
+                                      subtitle: Text("Subtitle"),
+                                    ),
+                                options: CarouselOptions(
+                                    onPageChanged:(int index, CarouselPageChangedReason reason){
+                                      setState(() {
+                                        curr_idx=index;
+                                      });
+                                    } ,
+                                    autoPlay: true,
+                                    autoPlayAnimationDuration: Duration(milliseconds: 500),
+                                    scrollDirection: Axis.vertical,
+                                    enableInfiniteScroll: true),
+                              )),
+                        )],
                     ),
                   )),
             ),

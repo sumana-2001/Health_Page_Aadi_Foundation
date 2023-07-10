@@ -11,6 +11,8 @@ class yoga extends StatefulWidget {
   State<yoga> createState() => _yogaState();
 }
 
+List<String> weekdays = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
+Map<String,List<String>> Tasks = {"yoga":["assets/images/yoga_pose.jpg"],"meditation":["assets/images/medition.jpeg"],"streches":["assets/images/poseeee.png"],"cables":["assets/images/cables.jpeg"],"bodyweight":["assets/images/bodyweight.png"]};
 class _yogaState extends State<yoga> {
   @override
   Widget build(BuildContext context) {
@@ -155,7 +157,7 @@ class _yogaState extends State<yoga> {
                           Container(
                             height: 200,
                             child:ListView.builder(
-                                itemCount: 5,
+                                itemCount: 3,
                                 scrollDirection: Axis.horizontal,
                                 physics: BouncingScrollPhysics(),
                                 shrinkWrap: true,
@@ -174,7 +176,7 @@ class _yogaState extends State<yoga> {
                                         ClipRect(
 
                                           child: Ink.image(
-                                              image: AssetImage("assets/images/poseeee.png"),
+                                              image: AssetImage(Tasks.values.elementAt(index)[0]),
                                               fit: BoxFit.cover,
                                             height: 140,
                                             width: 150,
@@ -188,7 +190,8 @@ class _yogaState extends State<yoga> {
                                               width: 30,
                                               child: FloatingActionButton.small(
                                                 heroTag: index,
-                                                  onPressed: (){},
+                                                  onPressed: (){
+                                                  },
                                                 child: Icon(Icons.play_arrow,size: 20,),
                                                 backgroundColor: Colors.lightBlueAccent,
                                                   
@@ -220,7 +223,7 @@ class _yogaState extends State<yoga> {
                             width: MediaQuery.of(context).size.width,
                             child: ListView.builder(
                               shrinkWrap: true,
-                              itemCount: 6,
+                              itemCount: 7,
                               itemBuilder: (context, index) {
                                 // Generate a random image for demonstration purposes
                                 final randomImageUrl = 'https://media.emailonacid.com/wp-content/uploads/2019/03/2019-GifsInEmail.gif';
@@ -235,7 +238,7 @@ class _yogaState extends State<yoga> {
                                   child: ListTile(
                                     leading: Image.network(randomImageUrl), // Random image
                                     title: Text(
-                                      "name",
+                                      weekdays[index],
                                       style: TextStyle(fontWeight: FontWeight.bold),
                                     ),
                                     subtitle: LinearProgressIndicator(
