@@ -502,28 +502,48 @@ class _FetchDetails extends State<Fetch>{
                 }
                 return GestureDetector(
                   onTap: (){
-                    Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Display(
-                          title: result[index]['exercise_name'],
-                          Map_Values: Map_values,
-                          Category: result[index]['Category'],
-                          Difficulty: result[index]['Difficulty'],
-                          Exercise_Name: result[index]['exercise_name'],
-                          Steps: Steps
-                      ),));
                   },
-                  child: Card(
-                    elevation: 10,
+                  child: SizedBox(
+                  width: double.infinity,
+                height: 80,
+                  child : Card(
+                      color: Colors.blue.shade100,
+                    elevation: 40,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
                         vertical: 10,horizontal: 10
                       ),
-                      child: Text(result[index]['exercise_name']),
+
+                child :
+                Row(
+                children : [
+                  Expanded( child : Text(result[index]['exercise_name'],style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.black),),),
+                FloatingActionButton.small(
+                heroTag: index,
+                onPressed: (){
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Display(
+                            title: result[index]['exercise_name'],
+                            Map_Values: Map_values,
+                            Category: result[index]['Category'],
+                            Difficulty: result[index]['Difficulty'],
+                            Exercise_Name: result[index]['exercise_name'],
+                            Steps: Steps
+                        ),));
+                },
+                child: Icon(Icons.play_arrow,size: 15,),
+                backgroundColor: Colors.lightBlueAccent,
+                )
+                      ]
                     ),
                   )
-                );
+                  )
+                ));
               }
           );
         }
