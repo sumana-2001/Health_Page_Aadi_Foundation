@@ -12,7 +12,7 @@ class yoga extends StatefulWidget {
 }
 
 List<String> weekdays = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-Map<String,List<String>> Tasks = {"yoga":["assets/images/yoga_pose.jpg"],"meditation":["assets/images/medition.jpeg"],"streches":["assets/images/poseeee.png"],"cables":["assets/images/cables.jpeg"],"bodyweight":["assets/images/bodyweight.png"]};
+Map<String,List<String>> Tasks = {"Yoga":["assets/images/yoga_pose.jpg"],"meditation":["assets/images/medition.jpeg"],"Stretches":["assets/images/poseeee.png"],"Cables":["assets/images/cables.jpeg"],"BodyWeight":["assets/images/bodyweight.png"],"Kettlebells":["assets/images/kettlebells.jpeg"]};
 class _yogaState extends State<yoga> {
   @override
   Widget build(BuildContext context) {
@@ -157,7 +157,7 @@ class _yogaState extends State<yoga> {
                           Container(
                             height: 200,
                             child:ListView.builder(
-                                itemCount: 3,
+                                itemCount: 6,
                                 scrollDirection: Axis.horizontal,
                                 physics: BouncingScrollPhysics(),
                                 shrinkWrap: true,
@@ -191,6 +191,14 @@ class _yogaState extends State<yoga> {
                                               child: FloatingActionButton.small(
                                                 heroTag: index,
                                                   onPressed: (){
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                          builder: (_) => Fetch(
+                                                              choice: 2,
+                                                              name: Tasks.keys.elementAt(index)
+                                                          )
+                                                      ),);
                                                   },
                                                 child: Icon(Icons.play_arrow,size: 20,),
                                                 backgroundColor: Colors.lightBlueAccent,

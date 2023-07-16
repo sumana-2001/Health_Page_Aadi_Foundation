@@ -102,6 +102,7 @@ class _musclewikiState extends State<musclewiki> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (_) => Fetch(
+                                      choice: 1,
                                       name: "Shoulders"
                                   )
                                 ),
@@ -127,6 +128,7 @@ class _musclewikiState extends State<musclewiki> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => Fetch(
+                                        choice: 1,
                                         name: "Shoulders"
                                     )
                                 ),);
@@ -150,6 +152,7 @@ class _musclewikiState extends State<musclewiki> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => Fetch(
+                                          choice: 1,
                                           name: "Chest"
                                       )
                                   ),);
@@ -173,6 +176,7 @@ class _musclewikiState extends State<musclewiki> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => Fetch(
+                                        choice: 1,
                                         name: "Biceps"
                                     )
                                 ),);
@@ -197,6 +201,7 @@ class _musclewikiState extends State<musclewiki> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => Fetch(
+                                        choice: 1,
                                         name: "Biceps"
                                     )
                                 ),);
@@ -221,6 +226,7 @@ class _musclewikiState extends State<musclewiki> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => Fetch(
+                                        choice: 1,
                                         name: "Forearms"
                                     )
                                 ),);
@@ -245,6 +251,7 @@ class _musclewikiState extends State<musclewiki> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) => Fetch(
+                                          choice: 1,
                                           name: "Forearms"
                                       )
                                   ),);
@@ -269,6 +276,7 @@ class _musclewikiState extends State<musclewiki> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => Fetch(
+                                        choice: 1,
                                         name: "Abdominals"
                                     )
                                 ),);
@@ -293,6 +301,7 @@ class _musclewikiState extends State<musclewiki> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => Fetch(
+                                        choice: 1,
                                         name: "Abdominals"
                                     )
                                 ),);
@@ -317,6 +326,7 @@ class _musclewikiState extends State<musclewiki> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => Fetch(
+                                        choice: 1,
                                         name: "Abdominals"
                                     )
                                 ),);
@@ -342,6 +352,7 @@ class _musclewikiState extends State<musclewiki> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => Fetch(
+                                        choice: 1,
                                         name: "Quads"
                                     )
                                 ),);
@@ -371,6 +382,7 @@ class _musclewikiState extends State<musclewiki> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => Fetch(
+                                        choice: 1,
                                         name: "Quads"
                                     )
                                 ),);
@@ -396,6 +408,7 @@ class _musclewikiState extends State<musclewiki> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (_) => Fetch(
+                                        choice: 1,
                                         name: "Calves"
                                     )
                                 ),);
@@ -429,8 +442,9 @@ class _musclewikiState extends State<musclewiki> {
 
 
 class Fetch extends StatefulWidget{
+  int choice;
   String name;
-  Fetch({Key? key, required this.name}) : super(key: key);
+  Fetch({Key? key, required this.name, required this.choice}) : super(key: key);
 
   @override
   _FetchDetails createState() => _FetchDetails();
@@ -453,104 +467,219 @@ class _FetchDetails extends State<Fetch>{
       body: FutureBuilder<List<dynamic>>(
         future: futureDetails,
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot){
-        if (snapshot.hasData){
-          List<dynamic> details = List.from(snapshot.data);
-          List<dynamic> result = [];
-          //segregate the data according to body parts
-          for(var jsonobj in details) {
-            int num = jsonobj['target'].length;
-            switch(num){
-              case 1:
-                if(jsonobj['target']['Primary'].contains(widget.name)){
-                  result.add(jsonobj);
-                }
-                break;
+          //add a switch case condition to verify the details
+        switch(widget.choice) {
+          case 1:
+            if (snapshot.hasData) {
+              List<dynamic> details = List.from(snapshot.data);
+              List<dynamic> result = [];
+              //segregate the data according to body parts
+              for (var jsonobj in details) {
+                int num = jsonobj['target'].length;
+                switch (num) {
+                  case 1:
+                    if (jsonobj['target']['Primary'].contains(widget.name)) {
+                      result.add(jsonobj);
+                    }
+                    break;
 
-              case 2:
-                if(jsonobj['target']['Primary'].contains(widget.name) || jsonobj['target']['Secondary'].contains(widget.name)){
-                  result.add(jsonobj);
+                  case 2:
+                    if (jsonobj['target']['Primary'].contains(widget.name) ||
+                        jsonobj['target']['Secondary'].contains(widget.name)) {
+                      result.add(jsonobj);
+                    }
+                    break;
+                  case 3:
+                    if (jsonobj['target']['Primary'].contains(widget.name) ||
+                        jsonobj['target']['Secondary'].contains(widget.name) ||
+                        jsonobj['target']['Tertiary'].contains(widget.name)) {
+                      result.add(jsonobj);
+                    }
+                    break;
+                  default:
+                    result.add(jsonobj);
+                    break;
                 }
-                break;
-              case 3:
-                if(jsonobj['target']['Primary'].contains(widget.name) || jsonobj['target']['Secondary'].contains(widget.name) || jsonobj['target']['Tertiary'].contains(widget.name)){
-                  result.add(jsonobj);
-                }
-                break;
-              default:
-                result.add(jsonobj);
-                break;
-            }
-          }
-
-          return ListView.builder(
-              itemCount: result.length,
-              itemBuilder: (BuildContext context,int index){
-                //setting video URLS
-                Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
-                Map<String,String> Map_values = {};
-                int param = 0;
-                for(var value in videoURLS){
-                  Map_values[param.toString()] = value.toString().substring(0,value.toString().length - 6);
-                  param++;
-                }
-
-                //setting instructions
-                List<dynamic> instructions = result[index]['steps'].toList();
-                List<String> Steps = [];
-                for(var value in instructions){
-                  Steps.add(value.toString());
-                }
-                return GestureDetector(
-                  onTap: (){
-                  },
-                  child: SizedBox(
-                  width: double.infinity,
-                height: 80,
-                  child : Card(
-                      color: Colors.blue.shade100,
-                    elevation: 40,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10,horizontal: 10
-                      ),
-
-                child :
-                Row(
-                children : [
-                  Expanded( child : Text(result[index]['exercise_name'],style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: Colors.black),),),
-                FloatingActionButton.small(
-                heroTag: index,
-                onPressed: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => Display(
-                            title: result[index]['exercise_name'],
-                            Map_Values: Map_values,
-                            Category: result[index]['Category'],
-                            Difficulty: result[index]['Difficulty'],
-                            Exercise_Name: result[index]['exercise_name'],
-                            Steps: Steps
-                        ),));
-                },
-                child: Icon(Icons.play_arrow,size: 15,),
-                backgroundColor: Colors.lightBlueAccent,
-                )
-                      ]
-                    ),
-                  )
-                  )
-                ));
               }
-          );
-        }
-        else{
-          return Center(
-              child: CircularProgressIndicator()
-          );
+
+              return ListView.builder(
+                  itemCount: result.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    //setting video URLS
+                    Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
+                    Map<String, String> Map_values = {};
+                    int param = 0;
+                    for (var value in videoURLS) {
+                      Map_values[param.toString()] =
+                          value.toString().substring(0, value
+                              .toString()
+                              .length - 6);
+                      param++;
+                    }
+
+                    //setting instructions
+                    List<dynamic> instructions = result[index]['steps']
+                        .toList();
+                    List<String> Steps = [];
+                    for (var value in instructions) {
+                      Steps.add(value.toString());
+                    }
+                    return GestureDetector(
+                        onTap: () {},
+                        child: SizedBox(
+                            width: double.infinity,
+                            height: 80,
+                            child: Card(
+                                color: Colors.blue.shade100,
+                                elevation: 40,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 10
+                                  ),
+
+                                  child:
+                                  Row(
+                                      children: [
+                                        Expanded(child: Text(
+                                          result[index]['exercise_name'],
+                                          style: TextStyle(fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),),),
+                                        FloatingActionButton.small(
+                                          heroTag: index,
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Display(
+                                                          title: result[index]['exercise_name'],
+                                                          Map_Values: Map_values,
+                                                          Category: result[index]['Category'],
+                                                          Difficulty: result[index]['Difficulty'],
+                                                          Exercise_Name: result[index]['exercise_name'],
+                                                          Steps: Steps
+                                                      ),));
+                                          },
+                                          child: Icon(
+                                            Icons.play_arrow, size: 15,),
+                                          backgroundColor: Colors
+                                              .lightBlueAccent,
+                                        )
+                                      ]
+                                  ),
+                                )
+                            )
+                        ));
+                  }
+              );
+            }
+            else {
+              return Center(
+                  child: CircularProgressIndicator()
+              );
+            }
+            break;
+          case 2:
+            if (snapshot.hasData) {
+              List<dynamic> details = List.from(snapshot.data);
+              List<dynamic> result = [];
+              //segregate the data according to body parts
+              for (var jsonobj in details) {
+                if(jsonobj['Category'] == widget.name) {
+                  result.add(jsonobj);
+                }
+              }
+
+              return ListView.builder(
+                  itemCount: result.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    //setting video URLS
+                    Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
+                    Map<String, String> Map_values = {};
+                    int param = 0;
+                    for (var value in videoURLS) {
+                      Map_values[param.toString()] =
+                          value.toString().substring(0, value
+                              .toString()
+                              .length - 6);
+                      param++;
+                    }
+
+                    //setting instructions
+                    List<dynamic> instructions = result[index]['steps']
+                        .toList();
+                    List<String> Steps = [];
+                    for (var value in instructions) {
+                      Steps.add(value.toString());
+                    }
+                    return GestureDetector(
+                        onTap: () {},
+                        child: SizedBox(
+                            width: double.infinity,
+                            height: 80,
+                            child: Card(
+                                color: Colors.blue.shade100,
+                                elevation: 40,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10, horizontal: 10
+                                  ),
+
+                                  child:
+                                  Row(
+                                      children: [
+                                        Expanded(child: Text(
+                                          result[index]['exercise_name'],
+                                          style: TextStyle(fontSize: 22,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black),),),
+                                        FloatingActionButton.small(
+                                          heroTag: index,
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Display(
+                                                          title: result[index]['exercise_name'],
+                                                          Map_Values: Map_values,
+                                                          Category: result[index]['Category'],
+                                                          Difficulty: result[index]['Difficulty'],
+                                                          Exercise_Name: result[index]['exercise_name'],
+                                                          Steps: Steps
+                                                      ),));
+                                          },
+                                          child: Icon(
+                                            Icons.play_arrow, size: 15,),
+                                          backgroundColor: Colors
+                                              .lightBlueAccent,
+                                        )
+                                      ]
+                                  ),
+                                )
+                            )
+                        ));
+                  }
+              );
+            }
+            else {
+              return Center(
+                  child: CircularProgressIndicator()
+              );
+            }
+            break;
+          default:
+            return Center(
+                child: CircularProgressIndicator()
+            );
+
         }
       },
       )
@@ -584,7 +713,6 @@ class Display extends StatefulWidget {
 }
 
 class _DisplayState extends State<Display> {
-
 
   late VideoPlayerController _videoController;
   late bool _isPlaying = false;
