@@ -3,6 +3,10 @@ import 'package:readmore/readmore.dart';
 import 'package:updated_health_app/components/yoga.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import 'MuscleWiki.dart';
+
+// Map<dynamic,dynamic> results = {"Dumbbell Curl":[]}
+
 class player extends StatefulWidget {
   const player({Key? key});
 
@@ -166,6 +170,20 @@ class _playerState extends State<player> {
                                       //     "https://media.emailonacid.com/wp-content/uploads/2019/03/2019-GifsInEmail.gif"),
                                       title: Text("Name"),
                                       subtitle: Text("Subtitle"),
+                                      onTap: (){
+                                      //   Navigator.push(
+                                      //       context,
+                                      //       MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             Display(
+                                      //                 title: "Name",
+                                      //                 Map_Values: Map_values,
+                                      //                 Category: result[index]['Category'],
+                                      //                 Difficulty: result[index]['Difficulty'],
+                                      //                 Exercise_Name: "Name",
+                                      //                 Steps: Steps
+                                      //             ),));
+                                      },
                                     ),
                                 options: CarouselOptions(
                                     onPageChanged:(int index, CarouselPageChangedReason reason){

@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
       title: 'Health APP',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-
         // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         // useMaterial3: true,
       ),

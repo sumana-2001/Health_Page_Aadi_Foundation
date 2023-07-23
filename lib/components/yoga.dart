@@ -338,11 +338,11 @@ class _gbarState extends State<gbar> {
                 text: "Home",
               ),
               GButton(
-                icon: Icons.stacked_bar_chart_outlined,
+                icon: Icons.class_sharp,
                 text: "Classroom",
               ),
               GButton(
-                icon: Icons.shopping_bag_outlined,
+                icon: Icons.add_circle,
                 text: "Meditate",
               ),
               GButton(
@@ -359,3 +359,4 @@ class _gbarState extends State<gbar> {
     );
   }
 }
+
