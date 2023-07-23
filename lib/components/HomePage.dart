@@ -116,9 +116,9 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 final List<String> img = [
+  'assets/images/homepage_image.png',
   'assets/test/img.jpg',
-  'assets/test/img.jpg',
-  'assets/test/img.jpg'
+  'assets/images/back_bending_pose.jpg'
 ];
 
 

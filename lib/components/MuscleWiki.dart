@@ -28,7 +28,7 @@ Future<List<dynamic>> fetchExerciseDetails() async {
 }
 
 //images are
-List<String> bodies = ["assets/images/women_front.png","assets/images/man_front.png","assets/images/women_rear.png","assets/images/man_rear.png"];
+List<String> bodies = ["assets/images/man_front.png","assets/images/man_rear.png"];
 class musclewiki extends StatefulWidget {
   const musclewiki({super.key});
 
@@ -58,377 +58,539 @@ class _musclewikiState extends State<musclewiki> {
 
                     itemCount: bodies.length,
                     itemBuilder:
-                   (BuildContext context, int itemIndex) =>
+                      (BuildContext context, int itemIndex) =>
+                      Stack(
+                        alignment: Alignment.center,
+                        children: [
+                            Image.asset(bodies[itemIndex]
+                                , fit: BoxFit.contain),
 
-                     Stack(
-                    alignment: Alignment.center,
-                    children: [
+                            Positioned(
 
-                    Image.asset(bodies[itemIndex]
-                          ,fit: BoxFit.contain),
+                                top: 108,
+                                left: 150,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onTap: () {
 
-                      Positioned(
+                                  },
+                                )
+                            ),
+                            Positioned(
+                                left: 120,
+                                top: 120,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onTap: () {
+    if(bodies[itemIndex].contains("front")){
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (_) =>
+    Fetch(
+    choice: 1,
+    name: "Shoulders"
+    )
+    ),
+    );
+    }
+    else{
+    Navigator.push(
+    context,
+    MaterialPageRoute(
+    builder: (_) =>
+    Fetch(
+    choice: 1,
+    name: "Shoulders"
+    )
+    ),
+    );
 
-                        top: 108,
-                        left: 150,
-                        child: InkWell(
-                          child: Container(
-                          width: 8,
-                          height: 8,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: Colors.red,
-                          ),
-                        ),
-                          onTap: (){
+    }
+    })
+                            ),
+                            Positioned(
+                                right: 130,
+                                top: 120,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    if (bodies[itemIndex].contains("front")) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Shoulders"
+                                                )
+                                        ),);
+                                    }
+                                    else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Shoulders"
+                                                )
+                                        ),);
+                                    }
+                                  })
+                            ),
+                            Positioned(
+                                top: 140,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    if (bodies[itemIndex].contains("front")) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Chest"
+                                                )
+                                        ),);
+                                    }
+                                    else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Traps"
+                                                )
+                                        ),);
+                                    }
+                                  })
+                            ),
+                            Positioned(
+                                top: 170,
+                                left: 100,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    if (bodies[itemIndex].contains("front")) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Biceps"
+                                                )
+                                        ),);
+                                    }
+                                    else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Triceps"
+                                                )
+                                        ),);
+                                    }
+                                  }
 
-                          },
-                        )
-                      ),
-                      Positioned(
-                          left: 120,
-                          top: 120,
-                          child: InkWell(
-                              child: Container(
-                                width: 8,
-                                height: 8,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => Fetch(
-                                      choice: 1,
-                                      name: "Shoulders"
+                                )
+                            ),
+                            Positioned(
+                                top: 170,
+                                right: 110,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    if (bodies[itemIndex].contains("front")) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Biceps"
+                                                )
+                                        ),);
+                                    }
+                                    else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Triceps"
+                                                )
+                                        ),);
+                                    }
+                                  })
+                            ),
+                            Positioned(
+                                top: 220,
+                                left: 60,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    if(bodies[itemIndex].contains("front")){
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              Fetch(
+                                                  choice: 1,
+                                                  name: "Forearms"
+                                              )
+                                      ),);
+                                  }
+                                    else {
+
+
+                                    }})
+                            ),
+                            Positioned(
+                                top: 220,
+                                right: 60,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              Fetch(
+                                                  choice: 1,
+                                                  name: "Forearms"
+                                              )
+                                      ),);
+                                  },
+                                )
+                            ),
+                            Positioned(
+                                top: 230,
+                                left: 170,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 10,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  //center
+                                  onTap: () {
+                                    if (bodies[itemIndex].contains("front")) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Abdominals"
+                                                )
+                                        ),);
+                                    }
+                                    else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Lower back"
+                                                )
+                                        ),);
+                                    }
+                                  })
+                            ),
+                            Positioned(
+                                top: 220,
+                                right: 140,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  //left side
+                                  onTap: () {
+                                    if (bodies[itemIndex].contains("front")) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Abdominals"
+                                                )
+                                        ),);
+                                    }
+                                    else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Lats"
+                                                )
+                                        ),);
+                                    }
+                                  })
+                            ),
+                            Positioned(
+                                top: 220,
+                                left: 140,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  //right side
+                                  onTap: () {
+                                    if (bodies[itemIndex].contains("front")) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Abdominals"
+                                                )
+                                        ),);
+                                    }
+                                    else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Lats"
+                                                )
+                                        ),);
+                                    }
+                                  }
+                                )
+                            ),
+                            //
+                            Positioned(
+                                top: 350,
+                                left: 140,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 10,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    if (bodies[itemIndex].contains("front")) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Quads"
+                                                )
+                                        ),);
+                                    } else {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Hamstrings"
+                                                )
+                                        ),);
+                                    }
+                                  })
+                            ),
+                          Positioned(
+                              top: 300,
+                              left: 150,
+                              child: Material(
+                                  child: InkWell(
+                                    child: Container(
+                                      width: 10,
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                    splashColor: c,
+                                    onTap: () {
+                                      setState(() {
+                                        c = Colors.red;
+                                      });
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Glutes"
+                                                )
+                                        ),);
+                                    },
                                   )
-                                ),
-                              );
-
-                            },
-                          )
-                      ),
-                      Positioned(
-                          right: 130,
-                          top: 120,
-                          child: InkWell(
-                              child: Container(
-                                width: 8,
-                                height: 8,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => Fetch(
-                                        choice: 1,
-                                        name: "Shoulders"
-                                    )
-                                ),);
-
-                            },
-                          )
-                      ),
-                      Positioned(
-                          top: 140,
-                          child: InkWell(
-                              child: Container(
-                                width: 8,
-                                height: 8,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                              ),
-                              onTap: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => Fetch(
-                                          choice: 1,
-                                          name: "Chest"
-                                      )
-                                  ),);
-                              },
-                          )
-                      ),
-                      Positioned(
-                          top: 170,
-                          left: 100,
-                          child: InkWell(
-                            child: Container(
-                              width: 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.red,
-                              ),
+                              )
+                          ),
+                            Positioned(
+                                top: 470,
+                                left: 120,
+                                child: Material(
+                                    child: InkWell(
+                                      child: Container(
+                                        width: 8,
+                                        height: 8,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                      splashColor: c,
+                                      onTap: () {
+                                        setState(() {
+                                          c = Colors.red;
+                                        });
+                                        if (bodies[itemIndex].contains(
+                                            "front")) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    Fetch(
+                                                        choice: 1,
+                                                        name: "Quads"
+                                                    )
+                                            ),);
+                                        } else {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (_) =>
+                                                    Fetch(
+                                                        choice: 1,
+                                                        name: "Hamstrings"
+                                                    )
+                                            ),);
+                                        }
+                                      })
+                                )
                             ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => Fetch(
-                                        choice: 1,
-                                        name: "Biceps"
-                                    )
-                                ),);
-
-                            },
-                          )
-                      ),
-                      Positioned(
-                          top: 170,
-                          right: 110,
-                          child: InkWell(
-                            child: Container(
-                              width: 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.red,
-                              ),
+                            Positioned(
+                                top: 470,
+                                right: 120,
+                                child: InkWell(
+                                  child: Container(
+                                    width: 8,
+                                    height: 8,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.red,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) =>
+                                              Fetch(
+                                                  choice: 1,
+                                                  name: "Calves"
+                                              )
+                                      ),);
+                                  },
+                                )
                             ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => Fetch(
-                                        choice: 1,
-                                        name: "Biceps"
-                                    )
-                                ),);
+                          ],
 
-                            },
-                          )
-                      ),
-                      Positioned(
-                          top: 220,
-                          left: 60,
-                          child: InkWell(
-                            child: Container(
-                              width: 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.red,
-                              ),
-                            ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => Fetch(
-                                        choice: 1,
-                                        name: "Forearms"
-                                    )
-                                ),);
+                        // ),options: CarouselOptions(
+                        //         onPageChanged:(int index, CarouselPageChangedReason reason){
+                        //           setState(() {
+                        //             current = index;
+                        //           });
+                        //         } ,
+                        //         autoPlay: true,
+                        //         scrollDirection: Axis.horizontal,
+                        //         enableInfiniteScroll: true),
+                        //     )),
+                      )
 
-                            },
-                          )
-                      ),
-                      Positioned(
-                          top: 220,
-                          right: 60,
-                          child: InkWell(
-                              child: Container(
-                                width: 8,
-                                height: 8,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                              ),
-                              onTap: (){
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (_) => Fetch(
-                                          choice: 1,
-                                          name: "Forearms"
-                                      )
-                                  ),);
-
-                              },
-                          )
-                      ),
-                      Positioned(
-                          top: 230,
-                          left: 170,
-                          child: InkWell(
-                            child: Container(
-                              width: 10,
-                              height: 10,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.red,
-                              ),
-                            ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => Fetch(
-                                        choice: 1,
-                                        name: "Abdominals"
-                                    )
-                                ),);
-
-                            },
-                          )
-                      ),
-                      Positioned(
-                          top: 220,
-                          right: 140,
-                          child: InkWell(
-                            child: Container(
-                              width: 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.red,
-                              ),
-                            ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => Fetch(
-                                        choice: 1,
-                                        name: "Abdominals"
-                                    )
-                                ),);
-
-                            },
-                          )
-                      ),
-                      Positioned(
-                          top: 220,
-                          left: 140,
-                          child: InkWell(
-                            child: Container(
-                              width: 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.red,
-                              ),
-                            ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => Fetch(
-                                        choice: 1,
-                                        name: "Abdominals"
-                                    )
-                                ),);
-
-                            },
-                          )
-                      ),
-                      //
-                      Positioned(
-                          top: 350,
-                          left: 140,
-                          child: InkWell(
-                            child: Container(
-                              width: 10,
-                              height: 10,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.red,
-                              ),
-                            ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => Fetch(
-                                        choice: 1,
-                                        name: "Quads"
-                                    )
-                                ),);
-
-                            },
-                          )
-                      ),
-                      Positioned(
-                          top: 470,
-                          left: 120,
-                          child: Material(
-                              child : InkWell(
-                            child: Container(
-                              width: 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.red,
-                              ),
-                            ),
-                            splashColor: c,
-                            onTap: (){
-                              setState(() {
-                                c = Colors.red;
-                              });
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => Fetch(
-                                        choice: 1,
-                                        name: "Quads"
-                                    )
-                                ),);
-
-                            },
-                          )
-                          )
-                      ),
-                      Positioned(
-                          top: 470,
-                          right:120,
-                          child: InkWell(
-                            child: Container(
-                              width: 8,
-                              height: 8,
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: Colors.red,
-                              ),
-                            ),
-                            onTap: (){
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (_) => Fetch(
-                                        choice: 1,
-                                        name: "Calves"
-                                    )
-                                ),);
-
-                            },
-                          )
-                      ),
-                    ],
-
-                  // ),options: CarouselOptions(
-                  //         onPageChanged:(int index, CarouselPageChangedReason reason){
-                  //           setState(() {
-                  //             current = index;
-                  //           });
-                  //         } ,
-                  //         autoPlay: true,
-                  //         scrollDirection: Axis.horizontal,
-                  //         enableInfiniteScroll: true),
-                  //     )),
-               )
     )
     )
     )
@@ -501,7 +663,6 @@ class _FetchDetails extends State<Fetch>{
                     break;
                 }
               }
-
               return ListView.builder(
                   itemCount: result.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -510,11 +671,20 @@ class _FetchDetails extends State<Fetch>{
                     Map<String, String> Map_values = {};
                     int param = 0;
                     for (var value in videoURLS) {
-                      Map_values[param.toString()] =
-                          value.toString().substring(0, value
-                              .toString()
-                              .length - 6);
+                      //if(bodies[index].contains("man") == true) {
+                        Map_values[param.toString()] =
+                            value.toString().substring(0, value
+                                .toString()
+                                .length - 6);
+                      //}
+                      //else{
+                        Map_values[param.toString()] =
+                            value.toString().substring(0, value
+                                .toString()
+                                .length - 6);
+                      //}
                       param++;
+                      print(value);
                     }
 
                     //setting instructions
@@ -526,29 +696,33 @@ class _FetchDetails extends State<Fetch>{
                     }
                     return GestureDetector(
                         onTap: () {},
-                        child: SizedBox(
+                        child:
+                        SizedBox(
                             width: double.infinity,
-                            height: 80,
+                            height: 120,
                             child: Card(
-                                color: Colors.blue.shade100,
-                                elevation: 40,
+                                color: Color(0xFFE0E0E0),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0),
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 10
+                                      vertical: 20, horizontal: 10
                                   ),
 
                                   child:
-                                  Row(
+                                  Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Expanded(child: Text(
+                                   Expanded(child: Text(
                                           result[index]['exercise_name'],
-                                          style: TextStyle(fontSize: 22,
-                                              fontWeight: FontWeight.bold,
+                                          style: TextStyle(fontSize: 18,
+                                              fontWeight: FontWeight.w500,
                                               color: Colors.black),),),
-                                        FloatingActionButton.small(
+                                        Container(
+                                          height: 30,
+                                        child : FloatingActionButton.extended(
                                           heroTag: index,
                                           onPressed: () {
                                             Navigator.push(
@@ -564,11 +738,13 @@ class _FetchDetails extends State<Fetch>{
                                                           Steps: Steps
                                                       ),));
                                           },
-                                          child: Icon(
+                                          label: Text('Play',style: TextStyle(fontSize: 14,
+                                              color: Colors.white), ),
+                                          icon : Icon(
                                             Icons.play_arrow, size: 15,),
-                                          backgroundColor: Colors
-                                              .lightBlueAccent,
+                                          backgroundColor: Colors.lightBlueAccent,
                                         )
+                                        ),
                                       ]
                                   ),
                                 )
@@ -618,49 +794,54 @@ class _FetchDetails extends State<Fetch>{
                     }
                     return GestureDetector(
                         onTap: () {},
-                        child: SizedBox(
+                        child:  SizedBox(
                             width: double.infinity,
-                            height: 80,
+                            height: 120,
                             child: Card(
-                                color: Colors.blue.shade100,
-                                elevation: 40,
+                                color: Color(0xFFE0E0E0),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30.0),
+                                  borderRadius: BorderRadius.circular(10.0),
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      vertical: 10, horizontal: 10
+                                      vertical: 20, horizontal: 10
                                   ),
 
                                   child:
-                                  Row(
+                                  Column(
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         Expanded(child: Text(
                                           result[index]['exercise_name'],
-                                          style: TextStyle(fontSize: 22,
-                                              fontWeight: FontWeight.bold,
+                                          style: TextStyle(fontSize: 18,
+                                              fontWeight: FontWeight.w500,
                                               color: Colors.black),),),
-                                        FloatingActionButton.small(
-                                          heroTag: index,
-                                          onPressed: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Display(
-                                                          title: result[index]['exercise_name'],
-                                                          Map_Values: Map_values,
-                                                          Category: result[index]['Category'],
-                                                          Difficulty: result[index]['Difficulty'],
-                                                          Exercise_Name: result[index]['exercise_name'],
-                                                          Steps: Steps
-                                                      ),));
-                                          },
-                                          child: Icon(
-                                            Icons.play_arrow, size: 15,),
-                                          backgroundColor: Colors
-                                              .lightBlueAccent,
-                                        )
+                                        Container(
+                                            height: 30,
+                                            child : FloatingActionButton.extended(
+                                              heroTag: index,
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Display(
+                                                              title: result[index]['exercise_name'],
+                                                              Map_Values: Map_values,
+                                                              Category: result[index]['Category'],
+                                                              Difficulty: result[index]['Difficulty'],
+                                                              Exercise_Name: result[index]['exercise_name'],
+                                                              Steps: Steps
+                                                          ),));
+                                              },
+                                              label: Text('Play',style: TextStyle(fontSize: 14,
+                                                  color: Colors.white), ),
+                                              icon : Icon(
+                                                Icons.play_arrow, size: 15,),
+                                              backgroundColor: Colors.lightBlueAccent,
+                                            )
+                                        ),
                                       ]
                                   ),
                                 )
@@ -832,10 +1013,6 @@ class _DisplayState extends State<Display> {
         color: Color(0xFFD3F9FA),
          child: Column(
            children: [
-             Text(widget.title,style: TextStyle(
-               fontWeight: FontWeight.bold,
-               fontSize: 24.0,
-             ),),
              // Text(_currentPosition.toString(),style: TextStyle(fontSize: 12),),
              Slider(value: _currentPosition.inMilliseconds.toDouble(),
                  min: 0,
@@ -859,16 +1036,16 @@ class _DisplayState extends State<Display> {
                    _isPlaying ? Icons.pause : Icons.play_arrow,
                  ),
                ),
-               IconButton(
-                 onPressed: () {
-                   setState(() {
-                     _vol = !_vol;
-                   });
-                 },
-                 icon: _vol
-                     ? Icon(Icons.volume_up)
-                     : Icon(Icons.volume_off),
-               ),
+               // IconButton(
+               //   onPressed: () {
+               //     setState(() {
+               //       _vol = !_vol;
+               //     });
+               //   },
+               //   icon: _vol
+               //       ? Icon(Icons.volume_up)
+               //       : Icon(Icons.volume_off),
+               // ),
               IconButton(
                  onPressed: _changeVideo,
                  icon: Icon(Icons.skip_next),
@@ -876,19 +1053,18 @@ class _DisplayState extends State<Display> {
 
                ]
             ),
-        Padding(padding: EdgeInsets.only(bottom: 0),
-          child:Text(
-            "INSTRUCTIONS",
-            style: TextStyle(
-                fontWeight: FontWeight.bold, fontSize: 22),
-          ),
+        Padding(padding: EdgeInsets.only(bottom: 10),
+          child:Text(widget.title,style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24.0,
+          ),),
         ),
     Expanded(
     child : Container(
     child: ListView.builder(
       itemCount: widget.Steps.length,
     itemBuilder: (BuildContext context, int index){
-      return Padding(padding: EdgeInsets.all(5),child:Text(widget.Steps[index],style: TextStyle(fontSize: 16,fontStyle: FontStyle.italic,fontWeight: FontWeight.w500),));
+      return Padding(padding: EdgeInsets.all(5),child:Text((index+1).toString()+"  "+widget.Steps[index],style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500),));
     }
     )
 

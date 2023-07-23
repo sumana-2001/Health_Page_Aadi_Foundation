@@ -12,7 +12,7 @@ class yoga extends StatefulWidget {
 }
 
 List<String> weekdays = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-Map<String,List<String>> Tasks = {"Yoga":["assets/images/yoga_pose.jpg"],"meditation":["assets/images/medition.jpeg"],"Stretches":["assets/images/poseeee.png"],"Cables":["assets/images/cables.jpeg"],"BodyWeight":["assets/images/bodyweight.png"],"Kettlebells":["assets/images/kettlebells.jpeg"]};
+Map<String,List<String>> Tasks = {"Yoga":["assets/images/yoga.png"],"meditation":["assets/images/meditate.png"],"Stretches":["assets/images/streching.png"],"Cables":["assets/images/cables.jpeg"],"Band":["assets/images/bodyweight.png"],"Kettlebells":["assets/images/kettlebells.jpeg"],"BodyPartWise":["assets/images/man_front.png"]};
 class _yogaState extends State<yoga> {
   @override
   Widget build(BuildContext context) {
@@ -108,7 +108,7 @@ class _yogaState extends State<yoga> {
                                   alignment: Alignment.center,
                                   children: [
                                     Positioned(
-                                        child: Text("Name of workout"),
+                                        child: Text("TRX Workouts"),
                                       top: 30,
                                       left:30,
                                     ),
@@ -120,8 +120,13 @@ class _yogaState extends State<yoga> {
                                             onPressed: (){
                                               Navigator.push(
                                                 context,
-                                                MaterialPageRoute(builder: (context) => musclewiki()),
-                                              );
+                                                MaterialPageRoute(
+                                                    builder: (_) =>
+                                                        Fetch(
+                                                            choice: 2,
+                                                            name: "TRX"
+                                                        )
+                                                ),);
                                             },
                                           child: Icon(Icons.play_arrow),
                                         )
@@ -157,7 +162,7 @@ class _yogaState extends State<yoga> {
                           Container(
                             height: 200,
                             child:ListView.builder(
-                                itemCount: 6,
+                                itemCount: Tasks.length,
                                 scrollDirection: Axis.horizontal,
                                 physics: BouncingScrollPhysics(),
                                 shrinkWrap: true,
@@ -183,6 +188,11 @@ class _yogaState extends State<yoga> {
                                           ),
                                         ),
                                         Positioned(
+                                           left : 3,
+                                            bottom : 4,
+                                            child: Text(Tasks.keys.elementAt(index))
+                                        ),
+                                        Positioned(
                                           right: 10,
                                           bottom: 10,
                                             child: SizedBox(
@@ -191,14 +201,26 @@ class _yogaState extends State<yoga> {
                                               child: FloatingActionButton.small(
                                                 heroTag: index,
                                                   onPressed: (){
-                                                    Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (_) => Fetch(
-                                                              choice: 2,
-                                                              name: Tasks.keys.elementAt(index)
-                                                          )
-                                                      ),);
+                                                    if(Tasks.keys.elementAt(index) == "BodyPartWise"){
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(builder: (context) => musclewiki()),
+                                                      );
+                                                    }
+                                                    else {
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (_) =>
+                                                                Fetch(
+                                                                    choice: 2,
+                                                                    name: Tasks
+                                                                        .keys
+                                                                        .elementAt(
+                                                                        index)
+                                                                )
+                                                        ),);
+                                                    }
                                                   },
                                                 child: Icon(Icons.play_arrow,size: 20,),
                                                 backgroundColor: Colors.lightBlueAccent,
@@ -317,11 +339,11 @@ class _gbarState extends State<gbar> {
               ),
               GButton(
                 icon: Icons.stacked_bar_chart_outlined,
-                text: "Stats",
+                text: "Classroom",
               ),
               GButton(
                 icon: Icons.shopping_bag_outlined,
-                text: "Shop",
+                text: "Meditate",
               ),
               GButton(
                 icon: Icons.person,
