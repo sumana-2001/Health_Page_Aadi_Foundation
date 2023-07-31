@@ -3,6 +3,9 @@ import 'package:readmore/readmore.dart';
 import 'package:updated_health_app/components/yoga.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
+import 'MuscleWiki.dart';
+
+Map<String,List<String>> daily_journals = {"Cardio Yoga":["assets/images/bridge_pose.jpg","Chest","1"],"Core Blast":["assets/images/cardio_yoga.png","Band","2"],"Back Exercise":["assets/images/back_exercise.png","Lower Back","1"],"Warm Ups":["assets/images/warmups.png","Stretches","2"],"Core Workouts":["assets/images/core_workouts.png","Bodyweight","2"],"Leg Exercises":["assets/images/leg_exercise.png","Calves","1"],"Meditation":["assets/images/meditation1.png","TRX","2"],"Yoga":["assets/images/yoga1.png","Yoga","2"]};
 class player extends StatefulWidget {
   const player({Key? key});
 
@@ -24,7 +27,8 @@ class _playerState extends State<player> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Column(
+        body:
+        Column(
           children: [
             Row(
               children: [
@@ -68,7 +72,10 @@ class _playerState extends State<player> {
             ),
             Expanded(
               flex: 2,
-              child: ClipRRect(
+              child:  SingleChildScrollView(
+    physics: BouncingScrollPhysics(),
+    padding: EdgeInsets.all(5),
+    child: ClipRRect(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(30.0),
                     topRight: Radius.circular(30.0),
@@ -154,35 +161,53 @@ class _playerState extends State<player> {
                                 fontWeight: FontWeight.bold, fontSize: 22),
                           ),
                         ),
+
                         Expanded(
-                          child : Container(
-                              child: CarouselSlider.builder(
-                                itemCount: 7,
-                                itemBuilder:
-                                    (BuildContext context, int itemIndex, int pageViewIndex) =>
-                                    ListTile(
-                                      leading: Image.asset("assets/images/bridge_pose.gif"),
-                                      // leading: Image.network(
-                                      //     "https://media.emailonacid.com/wp-content/uploads/2019/03/2019-GifsInEmail.gif"),
-                                      title: Text("Name"),
-                                      subtitle: Text("Subtitle"),
-                                    ),
-                                options: CarouselOptions(
-                                    onPageChanged:(int index, CarouselPageChangedReason reason){
-                                      setState(() {
-                                        curr_idx=index;
-                                      });
-                                    } ,
-                                    autoPlay: true,
-                                    autoPlayAnimationDuration: Duration(milliseconds: 500),
-                                    scrollDirection: Axis.vertical,
-                                    enableInfiniteScroll: true),
-                              )),
-                        )],
+                          child :
+                          Container(
+                              child: ListView.builder(
+                                shrinkWrap: true,
+    itemCount: daily_journals.keys.length,
+    itemBuilder: (context, index) {
+    // Generate a random image for demonstration purposes
+    final randomImage = daily_journals.values.elementAt(index)[0];
+    final String name = daily_journals.values.elementAt(index)[1];
+    final String stringValue = daily_journals.values.elementAt(index)[2];
+    final int choice = int.parse(stringValue);
+    final String title = daily_journals.keys.elementAt(index);
+
+    return InkWell(
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Fetch(name: name, choice: choice, gender: "Male")),
+      );
+    },
+    child: Column(
+    children : [
+      ListTile(
+    leading: Container(
+      width: 80,
+      child : Image.asset(randomImage),
+    ),// Random image
+    title: Text(title,
+    style: TextStyle(fontWeight: FontWeight.bold),
+    ),
+    subtitle: Text("10 minutes",
+      style: TextStyle(),
+    ), // Progress value (between 0 and 1)
+    ),
+      Divider(),]));
+    },
+    ),
+
+
+    )),
+                        ],
                     ),
                   )),
             ),
-          ],
+            )],
         ),
       ),
     );
