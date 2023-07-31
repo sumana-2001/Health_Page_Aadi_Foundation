@@ -46,6 +46,7 @@ dependencies:
   readmore: ^2.2.0
   http: ^1.1.0
   chewie: ^1.7.0
+  flutter_svg: ^2.0.7
 
 dev_dependencies:
   flutter_test:
@@ -63,7 +64,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+#  fonts:
+#    - family: CustomIcons
+#      fonts:
+#        - asset: icons/classroomttf.ttf
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -88,6 +92,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
+  fonts:
+    - family: BasicIcons
+      fonts:
+        - asset: assets/fonts/BasicIcons.ttf
   # fonts:
   #   - family: Schyler
   #     fonts:
