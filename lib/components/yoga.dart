@@ -58,14 +58,16 @@ class _yogaState extends State<yoga> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.0,horizontal:10),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5.0, horizontal: 10),
                         child: CircleAvatar(
-                            radius: 15,
-                          ),
+                          radius: 15,
+                        ),
                       ),
                       Spacer(),
                       Padding(
-                        padding: EdgeInsets.symmetric(vertical: 5.0,horizontal:10),
+                        padding:
+                            EdgeInsets.symmetric(vertical: 5.0, horizontal: 10),
                         child: IconButton(
                             color: Colors.black,
                             onPressed: () {},
@@ -76,28 +78,32 @@ class _yogaState extends State<yoga> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0,horizontal:10),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 5.0, horizontal: 10),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "Hi, Name",
-                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 22, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 5.0,left:10,right: 10,bottom: 10),
+                    padding: EdgeInsets.only(
+                        top: 5.0, left: 10, right: 10, bottom: 10),
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "How are you feeling today?",
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
                   Center(
                     child: Card(
-                      elevation: 5,
+                        elevation: 5,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                           topRight: Radius.circular(20),
@@ -144,10 +150,11 @@ class _yogaState extends State<yoga> {
                         )),
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(vertical: 5.0,horizontal:10),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 25.0, horizontal: 10),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child:Text(
+                      child: Text(
                         'Recommended Flows',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 25),
@@ -155,118 +162,122 @@ class _yogaState extends State<yoga> {
                     ),
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height / 3,
+                    height: MediaQuery.of(context).size.height / 2.1,
                     width: double.infinity,
-                    child: ListView.builder(
-                        itemCount: Tasks.length,
-                        scrollDirection: Axis.horizontal,
-                        physics: BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemBuilder: (context, index) {
-                          return Column(children: [
-                            Card(
-                              color: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      color: Color(0xFF2DCBD0), width: 2),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Stack(
-                                children: [
-                                  ClipRect(
-                                    child: Ink.image(
-                                      image: AssetImage(
-                                          Tasks.values.elementAt(index)[0]),
-                                      //fit: BoxFit.cover,
-                                      fit: BoxFit.fill,
-                                      height: 200,
-                                      width: 200,
-                                    ),
-                                  ),
-                                  Positioned(
-                                      right: 10,
-                                      bottom: 10,
-                                      child: SizedBox(
-                                          height: 30,
-                                          width: 30,
-                                          child: FloatingActionButton.small(
-                                            heroTag: index,
-                                            onPressed: () {
-                                              if (Tasks.keys.elementAt(index) ==
-                                                  "Male Anatomy") {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          musclewiki(
-                                                              gender: "Male")),
-                                                );
-                                              } else if (Tasks.keys
-                                                      .elementAt(index) ==
-                                                  "Female Anatomy") {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          musclewiki(
-                                                              gender: "Female")),
-                                                );
-                                              } else if (Tasks.keys
-                                                      .elementAt(index) ==
-                                                  "Meditation") {
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) => Fetch(
-                                                          name: "TRX",
-                                                          choice: 2,
-                                                          gender: "Male")),
-                                                );
-                                              } else {
-                                                print(
-                                                    Tasks.keys.elementAt(index));
-                                                Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) => Fetch(
-                                                          name: Tasks.keys
-                                                              .elementAt(index),
-                                                          choice: 2,
-                                                          gender: "Male")),
-                                                );
-                                              }
-                                            },
-                                            child: Icon(
-                                              Icons.play_arrow,
-                                              size: 20,
-                                            ),
-                                            backgroundColor:
-                                                Colors.lightBlueAccent,
-                                          ))),
-                                ],
-                              ),
-                            ),
-                            Text(
-                              Tasks.keys.elementAt(index),
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.cyan,
-                                  fontSize: 15),
-                            ),
-                          ]);
-                        }),
-                  ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.all(
-                            20.0), // Adjust the padding value as per your requirement
-                        child: Text(
-                          'Continue Flows',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 25),
-                        ),
+                    child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 3.0,
+                        mainAxisSpacing: 3.0,
                       ),
-                    ],
+                      itemCount: Tasks.length,
+                      scrollDirection: Axis.horizontal,
+                      physics: BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return Column(children: [
+                          Card(
+                            color: Colors.white,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            child: Stack(
+                              children: [
+                                ClipRect(
+                                  child: Ink.image(
+                                    image: AssetImage(
+                                        Tasks.values.elementAt(index)[0]),
+                                    fit: BoxFit.fill,
+                                    height:
+                                        MediaQuery.of(context).size.height / 6,
+                                    width:
+                                        MediaQuery.of(context).size.width / 4,
+                                  ),
+                                ),
+                                Positioned(
+                                    right: 10,
+                                    bottom: 10,
+                                    child: SizedBox(
+                                        height: 30,
+                                        width: 30,
+                                        child: FloatingActionButton.small(
+                                          heroTag: index,
+                                          onPressed: () {
+                                            if (Tasks.keys.elementAt(index) ==
+                                                "Male Anatomy") {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        musclewiki(
+                                                            gender: "Male")),
+                                              );
+                                            } else if (Tasks.keys
+                                                    .elementAt(index) ==
+                                                "Female Anatomy") {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        musclewiki(
+                                                            gender: "Female")),
+                                              );
+                                            } else if (Tasks.keys
+                                                    .elementAt(index) ==
+                                                "Meditation") {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => Fetch(
+                                                        name: "TRX",
+                                                        choice: 2,
+                                                        gender: "Male")),
+                                              );
+                                            } else {
+                                              print(
+                                                  Tasks.keys.elementAt(index));
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => Fetch(
+                                                        name: Tasks.keys
+                                                            .elementAt(index),
+                                                        choice: 2,
+                                                        gender: "Male")),
+                                              );
+                                            }
+                                          },
+                                          child: Icon(
+                                            Icons.play_arrow,
+                                            size: 20,
+                                          ),
+                                          backgroundColor:
+                                              Colors.lightBlueAccent,
+                                        ))),
+                              ],
+                            ),
+                          ),
+                          Text(
+                            Tasks.keys.elementAt(index),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.cyan,
+                                fontSize: 10),
+                          ),
+                        ]);
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 25.0, horizontal: 10),
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Text(
+                        'Continue Flows',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25),
+                      ),
+                    ),
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width,
