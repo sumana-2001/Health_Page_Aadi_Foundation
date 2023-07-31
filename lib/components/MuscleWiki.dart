@@ -1,5 +1,8 @@
+import 'dart:core';
+import 'dart:core';
+import 'dart:core';
 import 'dart:ui';
-
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
@@ -28,16 +31,19 @@ Future<List<dynamic>> fetchExerciseDetails() async {
 }
 
 //images are
-List<String> bodies = ["assets/images/man_front.png","assets/images/man_rear.png"];
+List<String> male_bodies = ["assets/images/man_front.png","assets/images/man_rear.png"];
+List<String> female_bodies = ["assets/images/women_front.png","assets/images/women_rear.png"];
 class musclewiki extends StatefulWidget {
-  const musclewiki({super.key});
+  String gender;
+  musclewiki({Key? key, required this.gender}) : super(key: key);
+  //const musclewiki({super.key});
 
   @override
   State<musclewiki> createState() => _musclewikiState();
 }
 
 class _musclewikiState extends State<musclewiki> {
-
+  List<String> bodies = [];
   //ExerciseFetcher exerciseFetcher = ExerciseFetcher();
   Color c = Colors.white;
   int current = 0;
@@ -45,9 +51,14 @@ class _musclewikiState extends State<musclewiki> {
   void initState() {
     super.initState();
   }
-
-
   Widget build(BuildContext context) {
+         if(widget.gender == "Male"){
+           bodies = male_bodies;
+         }
+         else if(widget.gender == "Female"){
+           bodies = female_bodies;
+         }
+         print(widget.gender);
          return SafeArea(
              child: Scaffold(
                backgroundColor: Colors.white,
@@ -55,7 +66,6 @@ class _musclewikiState extends State<musclewiki> {
                   child : ListView.builder(
 
                     shrinkWrap: true,
-
                     itemCount: bodies.length,
                     itemBuilder:
                       (BuildContext context, int itemIndex) =>
@@ -103,7 +113,8 @@ class _musclewikiState extends State<musclewiki> {
     builder: (_) =>
     Fetch(
     choice: 1,
-    name: "Shoulders"
+    name: "Shoulders",
+    gender: widget.gender
     )
     ),
     );
@@ -115,15 +126,15 @@ class _musclewikiState extends State<musclewiki> {
     builder: (_) =>
     Fetch(
     choice: 1,
-    name: "Shoulders"
+    name: "Shoulders",
+        gender: widget.gender
     )
     ),
     );
-
     }
-    })
-                            ),
-                            Positioned(
+    })),
+                          Positioned(
+
                                 right: 130,
                                 top: 120,
                                 child: InkWell(
@@ -143,7 +154,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Shoulders"
+                                                    name: "Shoulders",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -154,7 +166,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Shoulders"
+                                                    name: "Shoulders",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -179,7 +192,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Chest"
+                                                    name: "Chest",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -190,7 +204,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Traps"
+                                                    name: "Traps",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -216,7 +231,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Biceps"
+                                                    name: "Biceps",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -227,7 +243,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Triceps"
+                                                    name: "Triceps",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -255,7 +272,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Biceps"
+                                                    name: "Biceps",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -266,7 +284,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Triceps"
+                                                    name: "Triceps",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -285,21 +304,19 @@ class _musclewikiState extends State<musclewiki> {
                                     ),
                                   ),
                                   onTap: () {
-                                    if(bodies[itemIndex].contains("front")){
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (_) =>
-                                              Fetch(
-                                                  choice: 1,
-                                                  name: "Forearms"
-                                              )
-                                      ),);
-                                  }
-                                    else {
-
-
-                                    }})
+                                    if (bodies[itemIndex].contains("front")) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) =>
+                                                Fetch(
+                                                    choice: 1,
+                                                    name: "Forearms",
+                                                    gender: widget.gender
+                                                )
+                                        ),);
+                                    }
+                                  })
                             ),
                             Positioned(
                                 top: 220,
@@ -320,7 +337,8 @@ class _musclewikiState extends State<musclewiki> {
                                           builder: (_) =>
                                               Fetch(
                                                   choice: 1,
-                                                  name: "Forearms"
+                                                  name: "Forearms",
+                                                  gender: widget.gender
                                               )
                                       ),);
                                   },
@@ -347,7 +365,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Abdominals"
+                                                    name: "Abdominals",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -358,7 +377,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Lower back"
+                                                    name: "Lower back",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -385,7 +405,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Abdominals"
+                                                    name: "Abdominals",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -396,7 +417,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Lats"
+                                                    name: "Lats",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -423,7 +445,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Abdominals"
+                                                    name: "Abdominals",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -434,7 +457,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Lats"
+                                                    name: "Lats",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -462,7 +486,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Quads"
+                                                    name: "Quads",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     } else {
@@ -472,7 +497,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Hamstrings"
+                                                    name: "Hamstrings",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     }
@@ -502,7 +528,8 @@ class _musclewikiState extends State<musclewiki> {
                                             builder: (_) =>
                                                 Fetch(
                                                     choice: 1,
-                                                    name: "Glutes"
+                                                    name: "Glutes",
+                                                    gender: widget.gender
                                                 )
                                         ),);
                                     },
@@ -535,7 +562,8 @@ class _musclewikiState extends State<musclewiki> {
                                                 builder: (_) =>
                                                     Fetch(
                                                         choice: 1,
-                                                        name: "Quads"
+                                                        name: "Quads",
+                                                        gender: widget.gender
                                                     )
                                             ),);
                                         } else {
@@ -545,7 +573,8 @@ class _musclewikiState extends State<musclewiki> {
                                                 builder: (_) =>
                                                     Fetch(
                                                         choice: 1,
-                                                        name: "Hamstrings"
+                                                        name: "Hamstrings",
+                                                        gender: widget.gender
                                                     )
                                             ),);
                                         }
@@ -571,7 +600,8 @@ class _musclewikiState extends State<musclewiki> {
                                           builder: (_) =>
                                               Fetch(
                                                   choice: 1,
-                                                  name: "Calves"
+                                                  name: "Calves",
+                                                  gender: widget.gender
                                               )
                                       ),);
                                   },
@@ -606,7 +636,8 @@ class _musclewikiState extends State<musclewiki> {
 class Fetch extends StatefulWidget{
   int choice;
   String name;
-  Fetch({Key? key, required this.name, required this.choice}) : super(key: key);
+  String gender;
+  Fetch({Key? key, required this.name, required this.choice,required this.gender}) : super(key: key);
 
   @override
   _FetchDetails createState() => _FetchDetails();
@@ -625,6 +656,7 @@ class _FetchDetails extends State<Fetch>{
 
   @override
   Widget build(BuildContext context) {
+    print(widget.gender);
     return Scaffold(
       body: FutureBuilder<List<dynamic>>(
         future: futureDetails,
@@ -671,18 +703,29 @@ class _FetchDetails extends State<Fetch>{
                     Map<String, String> Map_values = {};
                     int param = 0;
                     for (var value in videoURLS) {
-                      //if(bodies[index].contains("man") == true) {
+                      if(widget.gender == "Male") {
                         Map_values[param.toString()] =
                             value.toString().substring(0, value
                                 .toString()
                                 .length - 6);
-                      //}
-                      //else{
+                      }
+                      ////the above step is been considered because there are no female videos associated in the above API, instead the slight change in string replacing male with female produces the result
+                      else if(widget.gender == "Female") {
                         Map_values[param.toString()] =
                             value.toString().substring(0, value
                                 .toString()
                                 .length - 6);
-                      //}
+                        print(
+                            "check if it has a male(if yes replace with female) : ");
+                        int pos = Map_values[param.toString()]!.indexOf(
+                            r'male');
+                        print(pos);
+                        print(Map_values[param.toString()]?.substring(
+                            pos, pos + 4));
+                        Map_values[param.toString()] = Map_values[param.toString()]!.replaceRange(pos,pos+4,"female");
+                        print("replaced and it is : ");
+                        print(Map_values[param.toString()]);
+                      }
                       param++;
                       print(value);
                     }
@@ -723,7 +766,7 @@ class _FetchDetails extends State<Fetch>{
                                         Container(
                                           height: 30,
                                         child : FloatingActionButton.extended(
-                                          heroTag: index,
+                                          heroTag: null,
                                           onPressed: () {
                                             Navigator.push(
                                                 context,
@@ -820,7 +863,7 @@ class _FetchDetails extends State<Fetch>{
                                         Container(
                                             height: 30,
                                             child : FloatingActionButton.extended(
-                                              heroTag: index,
+                                              heroTag: null,
                                               onPressed: () {
                                                 Navigator.push(
                                                     context,
@@ -1048,7 +1091,12 @@ class _DisplayState extends State<Display> {
                // ),
               IconButton(
                  onPressed: _changeVideo,
-                 icon: Icon(Icons.skip_next),
+                 icon: Image.asset(
+                   'assets/icons/camera-rotate-light.png', // Replace with the path to your image
+                   width: 40,  // Set an appropriate width for the icon
+                   height: 30, // Set an appropriate height for the icon
+                 ),
+                color: Colors.cyanAccent,
                ),
 
                ]
