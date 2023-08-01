@@ -85,7 +85,7 @@ class _yogaState extends State<yoga> {
                       child: Text(
                         "Hi, Name",
                         style: TextStyle(
-                            fontSize: 22, fontWeight: FontWeight.bold),
+                            fontSize: 26, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -97,7 +97,7 @@ class _yogaState extends State<yoga> {
                       child: Text(
                         "How are you feeling today?",
                         style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.bold),
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -162,11 +162,11 @@ class _yogaState extends State<yoga> {
                     ),
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height / 2.1,
+                    height: MediaQuery.of(context).size.height / 3.7,
                     width: double.infinity,
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
+                        crossAxisCount: 1,
                         crossAxisSpacing: 3.0,
                         mainAxisSpacing: 3.0,
                       ),
@@ -175,95 +175,68 @@ class _yogaState extends State<yoga> {
                       physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return Column(children: [
-                          Card(
+                        return GestureDetector(
+                          onTap: () {
+                            if (Tasks.keys.elementAt(index) ==
+                                "Male Anatomy") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        musclewiki(
+                                            gender: "Male")),
+                              );
+                            } else if (Tasks.keys
+                                .elementAt(index) ==
+                                "Female Anatomy") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        musclewiki(
+                                            gender: "Female")),
+                              );
+                            } else if (Tasks.keys
+                                .elementAt(index) ==
+                                "Meditation") {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Fetch(
+                                        name: "TRX",
+                                        choice: 2,
+                                        gender: "Male")),
+                              );
+                            } else {
+                              print(Tasks.keys.elementAt(index));
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Fetch(
+                                        name: Tasks.keys
+                                            .elementAt(index),
+                                        choice: 2,
+                                        gender: "Male")),
+                              );
+                            }
+                          },
+                          child: Card(
                             color: Colors.white,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            child: Stack(
-                              children: [
-                                ClipRect(
+                            child: ClipRect(
                                   child: Ink.image(
                                     image: AssetImage(
                                         Tasks.values.elementAt(index)[0]),
                                     fit: BoxFit.fill,
                                     height:
-                                        MediaQuery.of(context).size.height / 6,
-                                    width:
-                                        MediaQuery.of(context).size.width / 4,
+                                        MediaQuery.of(context).size.height / 5,
+                                    width: MediaQuery.of(context).size.width / 4,
                                   ),
                                 ),
-                                Positioned(
-                                    right: 10,
-                                    bottom: 10,
-                                    child: SizedBox(
-                                        height: 30,
-                                        width: 30,
-                                        child: FloatingActionButton.small(
-                                          heroTag: index,
-                                          onPressed: () {
-                                            if (Tasks.keys.elementAt(index) ==
-                                                "Male Anatomy") {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        musclewiki(
-                                                            gender: "Male")),
-                                              );
-                                            } else if (Tasks.keys
-                                                    .elementAt(index) ==
-                                                "Female Anatomy") {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        musclewiki(
-                                                            gender: "Female")),
-                                              );
-                                            } else if (Tasks.keys
-                                                    .elementAt(index) ==
-                                                "Meditation") {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) => Fetch(
-                                                        name: "TRX",
-                                                        choice: 2,
-                                                        gender: "Male")),
-                                              );
-                                            } else {
-                                              print(
-                                                  Tasks.keys.elementAt(index));
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) => Fetch(
-                                                        name: Tasks.keys
-                                                            .elementAt(index),
-                                                        choice: 2,
-                                                        gender: "Male")),
-                                              );
-                                            }
-                                          },
-                                          child: Icon(
-                                            Icons.play_arrow,
-                                            size: 20,
-                                          ),
-                                          backgroundColor:
-                                              Colors.lightBlueAccent,
-                                        ))),
-                              ],
-                            ),
+
                           ),
-                          Text(
-                            Tasks.keys.elementAt(index),
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.cyan,
-                                fontSize: 10),
-                          ),
-                        ]);
+                        );
                       },
                     ),
                   ),
@@ -297,7 +270,10 @@ class _yogaState extends State<yoga> {
                             );
                           },
                           child: ListTile(
-                            leading: Image.asset(randomImage), // Random image
+                            leading: Image.asset(
+                                randomImage,
+                              width: MediaQuery.of(context).size.width/6,
+                            ), // Random image
                             title: Text(
                               weekdays[index],
                               style: TextStyle(fontWeight: FontWeight.bold),
