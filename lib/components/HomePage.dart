@@ -1,5 +1,6 @@
 import "package:carousel_slider/carousel_slider.dart";
 import "package:flutter/material.dart";
+import "package:google_fonts/google_fonts.dart";
 import "package:smooth_page_indicator/smooth_page_indicator.dart";
 import "package:updated_health_app/components/yoga.dart";
 
@@ -56,15 +57,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     children: [
                       Text(
                         "Start your yoga journey now",
-                        style:
-                            TextStyle(fontSize: 27, fontWeight: FontWeight.w600),
-                      ),
+                        style:GoogleFonts.nunitoSans(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 27,
+
+                        ),
+                        ),
                       Spacer(),
                       Text(
                         "Our expert will help you and they will guide\n"
                         "you how you can improve your health",
-                        style: TextStyle(
-                          color: Colors.grey,
+                        style: GoogleFonts.nunitoSans(
+                          color:Colors.grey,
+                          fontWeight: FontWeight.w400,
                           fontSize: 15,
                         ),
                         textAlign: TextAlign.center,
@@ -87,9 +92,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   },
                   label: Row(
                     children: [
-                      const Text(
+                      Text(
                         "GET STARTED",
-                        style: TextStyle(color: Colors.white),
+                        style: GoogleFonts.nunitoSans(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                        )
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 25,
                       ),
                       Icon(
                         Icons.arrow_forward,

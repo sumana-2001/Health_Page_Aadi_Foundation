@@ -940,7 +940,6 @@ class _DisplayState extends State<Display> {
                   icon: Icon(Icons.arrow_back),
                 ),
                 Spacer(),
-                Spacer(),
                 IconButton(
                   onPressed: () {
                     setState(() {

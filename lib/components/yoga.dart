@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:proste_bezier_curve/proste_bezier_curve.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:updated_health_app/components/MuscleWiki.dart';
 import 'package:updated_health_app/components/player.dart';
 
@@ -84,8 +83,11 @@ class _yogaState extends State<yoga> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "Hi, Name",
-                        style: TextStyle(
-                            fontSize: 26, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.nunitoSans(
+                            fontSize: 25,
+                          fontWeight: FontWeight.w800,
+                          color: Color(0xFF575757),
+                        ),
                       ),
                     ),
                   ),
@@ -96,8 +98,11 @@ class _yogaState extends State<yoga> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         "How are you feeling today?",
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                        style: GoogleFonts.nunitoSans(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16,
+                          color: Color(0xFF575757),
+                        )
                       ),
                     ),
                   ),
@@ -112,19 +117,26 @@ class _yogaState extends State<yoga> {
                         color: Color(0xFFCEF8FA),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width,
-                          height: MediaQuery.of(context).size.height / 5,
+                          height: MediaQuery.of(context).size.height / 4.5,
                           child: Stack(
                             alignment: Alignment.center,
                             children: [
                               Positioned(
-                                child: Text("Band Workouts"),
+                                child: Text(
+                                    "Band Workouts",
+                                  style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 16,
+                                  ),
+                                ),
                                 top: 30,
                                 left: 30,
                               ),
                               Positioned(
-                                  bottom: 10,
-                                  left: 30,
+                                  bottom: 15,
+                                  left: 20,
                                   child: FloatingActionButton.small(
+                                    elevation: 3,
                                     backgroundColor: Colors.lightBlue,
                                     onPressed: () {
                                       Navigator.push(
@@ -133,7 +145,8 @@ class _yogaState extends State<yoga> {
                                             builder: (context) => Fetch(
                                                 name: "Band",
                                                 choice: 2,
-                                                gender: "Male")),
+                                                gender: "Male"),
+                                        ),
                                       );
                                     },
                                     child: Icon(Icons.play_arrow),
@@ -144,7 +157,8 @@ class _yogaState extends State<yoga> {
                                     "assets/images/poseeee.png",
                                     width: 200,
                                     height: 200,
-                                  )),
+                                  ),
+                              ),
                             ],
                           ),
                         )),
@@ -156,8 +170,11 @@ class _yogaState extends State<yoga> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Recommended Flows',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 25),
+                        style: GoogleFonts.nunitoSans(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 25,
+                          color: Color(0xFF575757),
+                        ),
                       ),
                     ),
                   ),
@@ -247,8 +264,11 @@ class _yogaState extends State<yoga> {
                       alignment: Alignment.centerLeft,
                       child: Text(
                         'Continue Flows',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 25),
+                        style: GoogleFonts.nunitoSans(
+                          fontWeight: FontWeight.w800,
+                          fontSize: 25,
+                          color: Color(0xFF575757),
+                        ),
                       ),
                     ),
                   ),
@@ -276,10 +296,15 @@ class _yogaState extends State<yoga> {
                             ), // Random image
                             title: Text(
                               weekdays[index],
-                              style: TextStyle(fontWeight: FontWeight.bold),
+                              style: GoogleFonts.nunitoSans(
+                                fontWeight: FontWeight.w800,
+                                fontSize: 15,
+                                color: Colors.black,
+                              ),
+
                             ),
                             subtitle: LinearProgressIndicator(
-                              value: 0, // Progress value (between 0 and 1)
+                              value: .5, // Progress value (between 0 and 1)
                             ),
                           ),
                         );

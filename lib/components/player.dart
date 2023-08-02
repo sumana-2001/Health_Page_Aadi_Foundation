@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:readmore/readmore.dart';
 import 'package:updated_health_app/components/yoga.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 
 import 'MuscleWiki.dart';
 
@@ -127,14 +127,17 @@ class _playerState extends State<player> {
                         children: [
                           Text(
                             "Name of the routine",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 22),
+                            style: GoogleFonts.nunitoSans(
+                                fontWeight: FontWeight.w800, fontSize: 22
+                            ),
                           ),
                           Spacer(),
                           Text(
                             "Time",
-                            style: TextStyle(
-                                 fontSize: 11),
+                            style: GoogleFonts.nunitoSans(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                            ),
                           ),
                         ],
                       ),
@@ -153,14 +156,18 @@ class _playerState extends State<player> {
                               color: Colors.blueAccent),
                         ),
                       ),
-                      Text(
-                        "Daily Journal",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 22),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: Text(
+                          "Daily Journal",
+                          style: GoogleFonts.nunitoSans(
+                              fontWeight: FontWeight.w800, fontSize: 22
+                          ),
+                        ),
                       ),
                       SingleChildScrollView(
                         child: ListView.builder(
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: daily_journals.keys.length,
                           itemBuilder: (context, index) {
@@ -183,23 +190,25 @@ class _playerState extends State<player> {
                                         builder: (context) => Fetch(
                                             name: name,
                                             choice: choice,
-                                            gender: "Male")),
+                                            gender: "Male"),
+                                    ),
                                   );
                                 },
                                 child: Column(children: [
                                   ListTile(
-                                    leading: Container(
-                                      width: 80,
+                                    leading: SizedBox(
+                                      width: MediaQuery.of(context).size.width * 0.2,
                                       child: Image.asset(randomImage),
                                     ), // Random image
                                     title: Text(
                                       title,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                      style: GoogleFonts.nunitoSans(
+                                          fontWeight: FontWeight.w800,
+                                      ),
                                     ),
                                     subtitle: Text(
                                       "10 minutes",
-                                      style: TextStyle(),
+                                      style: GoogleFonts.nunitoSans(),
                                     ), // Progress value (between 0 and 1)
                                   ),
                                   const Divider(),
@@ -212,9 +221,6 @@ class _playerState extends State<player> {
                   ),
                 ),
               ),
-
-
-
             ],
           ),
         ),
