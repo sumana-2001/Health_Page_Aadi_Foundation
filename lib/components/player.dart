@@ -79,15 +79,140 @@ class _playerState extends State<player> {
                 height: MediaQuery.of(context).size.height,
                 width: double.infinity,
                 child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  padding: EdgeInsets.all(16),
                   physics: BouncingScrollPhysics(),
                   child: Column(
-                    children: List.generate(100, (index) {
-                      return Text("Hello");
-                    }),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        _currVal.toString(),
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      Slider(
+                          value: _currVal,
+                          label: _currVal.toString(),
+                          activeColor: Colors.blue,
+                          thumbColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              _currVal = value;
+                            });
+                          }),
+                      Row(
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _play = !_play;
+                              });
+                            },
+                            icon: _play
+                                ? Icon(Icons.play_arrow,color: Color(0xFF60BCFA),)
+                                : Icon(Icons.pause,color: Color(0xFF60BCFA)),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              setState(() {
+                                _vol = !_vol;
+                              });
+                            },
+                            icon: _vol
+                                ? Icon(Icons.volume_up,color: Color(0xFF60BCFA),)
+                                : Icon(Icons.volume_off,color: Color(0xFF60BCFA),),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Name of the routine",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 22),
+                          ),
+                          Spacer(),
+                          Text(
+                            "Time",
+                            style: TextStyle(
+                                 fontSize: 11),
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 18.0),
+                        child: ReadMoreText(
+                          content,
+                          trimLines: 1,
+                          trimCollapsedText: " Show More ",
+                          trimExpandedText: " Show less ",
+                          lessStyle: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueAccent),
+                          moreStyle: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.blueAccent),
+                        ),
+                      ),
+                      Text(
+                        "Daily Journal",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 22),
+                      ),
+                      SingleChildScrollView(
+                        child: ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: daily_journals.keys.length,
+                          itemBuilder: (context, index) {
+                            // Generate a random image for demonstration purposes
+                            final randomImage =
+                            daily_journals.values.elementAt(index)[0];
+                            final String name =
+                            daily_journals.values.elementAt(index)[1];
+                            final String stringValue =
+                            daily_journals.values.elementAt(index)[2];
+                            final int choice = int.parse(stringValue);
+                            final String title =
+                            daily_journals.keys.elementAt(index);
+
+                            return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => Fetch(
+                                            name: name,
+                                            choice: choice,
+                                            gender: "Male")),
+                                  );
+                                },
+                                child: Column(children: [
+                                  ListTile(
+                                    leading: Container(
+                                      width: 80,
+                                      child: Image.asset(randomImage),
+                                    ), // Random image
+                                    title: Text(
+                                      title,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    subtitle: Text(
+                                      "10 minutes",
+                                      style: TextStyle(),
+                                    ), // Progress value (between 0 and 1)
+                                  ),
+                                  const Divider(),
+                                ]));
+                          },
+                        ),
+                      )
+                      ]
+                    ),
                   ),
                 ),
               ),
-            )
+
 
 
             ],
@@ -97,156 +222,3 @@ class _playerState extends State<player> {
   }
 }
 
-/*
-Expanded(
-              flex: 2,
-              child: SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
-                padding: EdgeInsets.all(5),
-                child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30.0),
-                      topRight: Radius.circular(30.0),
-                    ),
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      color: Color(0xFFD3F9FA),
-                      width: MediaQuery.of(context).size.width,
-                      height: MediaQuery.of(context).size.height,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Center(
-                            child: SizedBox(
-                              width: MediaQuery.of(context).size.width / 1.1,
-                              // child: LinearProgressIndicator(
-                              //   value: 50,
-                              // ),
-                            ),
-                          ),
-                          Text(
-                            _currVal.toString(),
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          Slider(
-                              value: _currVal,
-                              label: _currVal.toString(),
-                              activeColor: Colors.blue,
-                              thumbColor: Colors.white,
-                              onChanged: (value) {
-                                setState(() {
-                                  _currVal = value;
-                                });
-                              }),
-                          Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _play = !_play;
-                                  });
-                                },
-                                icon: _play
-                                    ? Icon(Icons.play_arrow)
-                                    : Icon(Icons.pause),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _vol = !_vol;
-                                  });
-                                },
-                                icon: _vol
-                                    ? Icon(Icons.volume_up)
-                                    : Icon(Icons.volume_off),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 10),
-                            child: Text(
-                              "Name of the routine",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 22),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 60),
-                            child: ReadMoreText(
-                              content,
-                              trimLines: 1,
-                              trimCollapsedText: " Show More ",
-                              trimExpandedText: " Show less ",
-                              lessStyle: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blueAccent),
-                              moreStyle: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blueAccent),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 5),
-                            child: Text(
-                              "Daily Journal",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 22),
-                            ),
-                          ),
-                          Expanded(
-                              child: Container(
-                                child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: daily_journals.keys.length,
-                                  itemBuilder: (context, index) {
-                                    // Generate a random image for demonstration purposes
-                                    final randomImage =
-                                    daily_journals.values.elementAt(index)[0];
-                                    final String name =
-                                    daily_journals.values.elementAt(index)[1];
-                                    final String stringValue =
-                                    daily_journals.values.elementAt(index)[2];
-                                    final int choice = int.parse(stringValue);
-                                    final String title =
-                                    daily_journals.keys.elementAt(index);
-
-                                    return InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) => Fetch(
-                                                    name: name,
-                                                    choice: choice,
-                                                    gender: "Male")),
-                                          );
-                                        },
-                                        child: Column(children: [
-                                          ListTile(
-                                            leading: Container(
-                                              width: 80,
-                                              child: Image.asset(randomImage),
-                                            ), // Random image
-                                            title: Text(
-                                              title,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            subtitle: Text(
-                                              "10 minutes",
-                                              style: TextStyle(),
-                                            ), // Progress value (between 0 and 1)
-                                          ),
-                                          Divider(),
-                                        ]));
-                                  },
-                                ),
-                              )),
-                        ],
-                      ),
-                    )),
-              ),
-            )
- */
