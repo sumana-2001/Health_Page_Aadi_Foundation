@@ -145,6 +145,10 @@ class _playerState extends State<player> {
                         padding: const EdgeInsets.symmetric(vertical: 18.0),
                         child: ReadMoreText(
                           content,
+                          style:TextStyle(
+                            letterSpacing: 1,
+                            fontSize: 15,
+                          ),
                           trimLines: 1,
                           trimCollapsedText: " Show More ",
                           trimExpandedText: " Show less ",
