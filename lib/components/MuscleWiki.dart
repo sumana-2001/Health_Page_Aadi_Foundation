@@ -577,7 +577,6 @@ class _DisplayState extends State<Display> {
                   icon: Icon(Icons.arrow_back),
                 ),
                 Spacer(),
-                Spacer(),
                 IconButton(
                   onPressed: () {
                     setState(() {
@@ -594,6 +593,7 @@ class _DisplayState extends State<Display> {
               child: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   return Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
                     child: AspectRatio(
                       aspectRatio: _videoController.value.aspectRatio,
                       child: VideoPlayer(_videoController),

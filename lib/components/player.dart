@@ -17,7 +17,8 @@ Map<String, List<String>> daily_journals = {
 };
 
 class player extends StatefulWidget {
-  const player({Key? key});
+  double currVal;
+  player({Key? key,required this.currVal}): super(key: key);
 
   @override
   State<player> createState() => _playerState();
@@ -25,8 +26,6 @@ class player extends StatefulWidget {
 
 class _playerState extends State<player> {
   int curr_idx = 0;
-  double _currVal = 0;
-  bool isHeartBroken = false;
   bool _play = true;
   bool _vol = true;
   String content =
@@ -86,17 +85,19 @@ class _playerState extends State<player> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        _currVal.toString(),
+                        widget.currVal.toString(),
                         style: TextStyle(fontSize: 12),
                       ),
                       Slider(
-                          value: _currVal,
-                          label: _currVal.toString(),
+                        min: 0,
+                        max: 100,
+                          value: widget.currVal,
+                          label: widget.currVal.toString(),
                           activeColor: Colors.blue,
                           thumbColor: Colors.white,
                           onChanged: (value) {
                             setState(() {
-                              _currVal = value;
+                              widget.currVal = value;
                             });
                           }),
                       Row(

@@ -40,12 +40,13 @@ Map<String, List<String>> Tasks = {
 };
 
 class _yogaState extends State<yoga> {
+  double _currVal = 0;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
           extendBody: true,
-          //bottomNavigationBar: gbar(),
           backgroundColor: Colors.white,
           body: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
@@ -286,7 +287,7 @@ class _yogaState extends State<yoga> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => player()),
+                              MaterialPageRoute(builder: (context) => player(currVal: _currVal,)),
                             );
                           },
                           child: ListTile(
@@ -304,7 +305,7 @@ class _yogaState extends State<yoga> {
 
                             ),
                             subtitle: LinearProgressIndicator(
-                              value: .5, // Progress value (between 0 and 1)
+                              value: _currVal/10, // Progress value (between 0 and 1)
                             ),
                           ),
                         );
