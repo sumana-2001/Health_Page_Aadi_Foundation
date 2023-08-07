@@ -28,6 +28,7 @@ List<String> weekdays = [
   "Saturday",
   "Sunday"
 ];
+
 Map<String, List<String>> Tasks = {
   "Yoga": ["assets/flow-pic/yoga.png"],
   "Meditation": ["assets/flow-pic/meditation.png"],

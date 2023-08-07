@@ -1,5 +1,6 @@
 import 'dart:core';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:updated_health_app/components/yoga.dart';
 import 'package:video_player/video_player.dart';
 import 'package:updated_health_app/components/workoutsAPI.dart';
@@ -48,7 +49,13 @@ class BodyPart {
   final double right;
   final String gender;
   final String pos;
-  const BodyPart({required this.name, required this.top, required this.left,required this.right, required this.gender, required this.pos});
+  const BodyPart(
+      {required this.name,
+      required this.top,
+      required this.left,
+      required this.right,
+      required this.gender,
+      required this.pos});
 }
 
 class _musclewikiState extends State<musclewiki> {
@@ -71,46 +78,216 @@ class _musclewikiState extends State<musclewiki> {
     }
     print(widget.gender);
     final List<BodyPart> bodyParts = [
-      BodyPart(name: "Shoulders", top: 20, left: 35, right: 0, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Shoulders", top: 20, left: 0, right: 35, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Shoulders", top: 20, left: 33, right: 0, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Shoulders", top: 20, left: 0, right: 38, gender: widget.gender, pos: 'rear'),
+      BodyPart(
+          name: "Shoulders",
+          top: 20,
+          left: 35,
+          right: 0,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Shoulders",
+          top: 20,
+          left: 0,
+          right: 35,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Shoulders",
+          top: 20,
+          left: 33,
+          right: 0,
+          gender: widget.gender,
+          pos: 'rear'),
+      BodyPart(
+          name: "Shoulders",
+          top: 20,
+          left: 0,
+          right: 38,
+          gender: widget.gender,
+          pos: 'rear'),
 
-      BodyPart(name: "Chest", top: 20, left: 0, right: 0, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Traps", top: 20, left: 0, right: 0, gender: widget.gender, pos: 'rear'),
+      BodyPart(
+          name: "Chest",
+          top: 20,
+          left: 0,
+          right: 0,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Traps",
+          top: 20,
+          left: 0,
+          right: 0,
+          gender: widget.gender,
+          pos: 'rear'),
       //
-      BodyPart(name: "Biceps", top: 29, left: 50, right: 0, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Biceps", top: 29, left: 0, right: 50, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Triceps", top: 25, left: 43, right: 0, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Triceps", top: 25, left: 0, right: 50, gender: widget.gender, pos: 'rear'),
+      BodyPart(
+          name: "Biceps",
+          top: 29,
+          left: 50,
+          right: 0,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Biceps",
+          top: 29,
+          left: 0,
+          right: 50,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Triceps",
+          top: 25,
+          left: 43,
+          right: 0,
+          gender: widget.gender,
+          pos: 'rear'),
+      BodyPart(
+          name: "Triceps",
+          top: 25,
+          left: 0,
+          right: 50,
+          gender: widget.gender,
+          pos: 'rear'),
       //
-      BodyPart(name: "Forearms", top: 38, left: 72, right: 0, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Forearms", top: 38, left: 0, right: 72, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Forearms", top: 38, left: 67, right: 0, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Forearms", top: 38, left: 0, right: 72, gender: widget.gender, pos: 'rear'),
+      BodyPart(
+          name: "Forearms",
+          top: 38,
+          left: 72,
+          right: 0,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Forearms",
+          top: 38,
+          left: 0,
+          right: 72,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Forearms",
+          top: 38,
+          left: 67,
+          right: 0,
+          gender: widget.gender,
+          pos: 'rear'),
+      BodyPart(
+          name: "Forearms",
+          top: 38,
+          left: 0,
+          right: 72,
+          gender: widget.gender,
+          pos: 'rear'),
       //
-      BodyPart(name: "Abdominals", top: 30, left: 0, right: 0, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Lower back", top: 35, left: 0, right: 0, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Abdominals", top: 35, left: 25, right: 0, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Lats", top: 30, left: 20, right: 0, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Abdominals", top: 35, left: 0, right: 25, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Lats", top: 30, left: 0, right: 20, gender: widget.gender, pos: 'rear'),
+      BodyPart(
+          name: "Abdominals",
+          top: 30,
+          left: 0,
+          right: 0,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Lower back",
+          top: 35,
+          left: 0,
+          right: 0,
+          gender: widget.gender,
+          pos: 'rear'),
+      BodyPart(
+          name: "Abdominals",
+          top: 35,
+          left: 25,
+          right: 0,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Lats",
+          top: 30,
+          left: 20,
+          right: 0,
+          gender: widget.gender,
+          pos: 'rear'),
+      BodyPart(
+          name: "Abdominals",
+          top: 35,
+          left: 0,
+          right: 25,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Lats",
+          top: 30,
+          left: 0,
+          right: 20,
+          gender: widget.gender,
+          pos: 'rear'),
       //Midbody parts
-      BodyPart(name: "Glutes", top: 45, left: 0, right: 20, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Quads", top: 60, left: 0, right: 20, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Quads", top: 60, left: 20, right: 0, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Hamstrings", top: 60, left: 0, right: 20, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Hamstrings", top: 60, left: 20, right: 0, gender: widget.gender, pos: 'rear'),
+      BodyPart(
+          name: "Glutes",
+          top: 45,
+          left: 0,
+          right: 20,
+          gender: widget.gender,
+          pos: 'rear'),
+      BodyPart(
+          name: "Quads",
+          top: 60,
+          left: 0,
+          right: 20,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Quads",
+          top: 60,
+          left: 20,
+          right: 0,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Hamstrings",
+          top: 60,
+          left: 0,
+          right: 20,
+          gender: widget.gender,
+          pos: 'rear'),
+      BodyPart(
+          name: "Hamstrings",
+          top: 60,
+          left: 20,
+          right: 0,
+          gender: widget.gender,
+          pos: 'rear'),
       //leg parts
-      BodyPart(name: "Calves", top: 80, left: 0, right: 35, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Calves", top: 80, left: 35, right: 0, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Calves", top: 78, left: 0, right: 35, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Calves", top: 78, left: 25, right: 0, gender: widget.gender, pos: 'rear'),
-
-
-
+      BodyPart(
+          name: "Calves",
+          top: 80,
+          left: 0,
+          right: 35,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Calves",
+          top: 80,
+          left: 35,
+          right: 0,
+          gender: widget.gender,
+          pos: 'front'),
+      BodyPart(
+          name: "Calves",
+          top: 78,
+          left: 0,
+          right: 35,
+          gender: widget.gender,
+          pos: 'rear'),
+      BodyPart(
+          name: "Calves",
+          top: 78,
+          left: 25,
+          right: 0,
+          gender: widget.gender,
+          pos: 'rear'),
     ];
-
 
     return SafeArea(
       child: Scaffold(
@@ -134,13 +311,16 @@ class _musclewikiState extends State<musclewiki> {
                     fit: BoxFit.contain,
                   ),
                   ...bodyParts.map((bodyPart) {
-                    bool isFrontOrAny = bodyPart.pos == "front" || bodyPart.pos == "any";
-                    bool isRearOrAny = bodyPart.pos == "rear" || bodyPart.pos == "any";
+                    bool isFrontOrAny =
+                        bodyPart.pos == "front" || bodyPart.pos == "any";
+                    bool isRearOrAny =
+                        bodyPart.pos == "rear" || bodyPart.pos == "any";
 
-                    if ((hasFront && isFrontOrAny) || (hasRear && isRearOrAny)) {
+                    if ((hasFront && isFrontOrAny) ||
+                        (hasRear && isRearOrAny)) {
                       return Positioned(
                         top: (screenHeight * bodyPart.top) / 100,
-                        left: (screenWidth * bodyPart.left) /100,
+                        left: (screenWidth * bodyPart.left) / 100,
                         right: (screenWidth * bodyPart.right) / 100,
                         child: InkWell(
                           child: Container(
@@ -178,10 +358,8 @@ class _musclewikiState extends State<musclewiki> {
         ),
       ),
     );
-
   }
-  }
-
+}
 
 class Fetch extends StatefulWidget {
   int choice;
@@ -189,9 +367,9 @@ class Fetch extends StatefulWidget {
   String gender;
   Fetch(
       {Key? key,
-        required this.name,
-        required this.choice,
-        required this.gender})
+      required this.name,
+      required this.choice,
+      required this.gender})
       : super(key: key);
 
   @override
@@ -214,269 +392,215 @@ class _FetchDetails extends State<Fetch> {
     print(widget.gender);
     return Scaffold(
         body: FutureBuilder<List<dynamic>>(
-          future: futureDetails,
-          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            //add a switch case condition to verify the details
-            switch (widget.choice) {
-              case 1:
-                if (snapshot.hasData) {
-                  List<dynamic> details = List.from(snapshot.data);
-                  List<dynamic> result = [];
-                  //segregate the data according to body parts
-                  for (var jsonobj in details) {
-                    int num = jsonobj['target'].length;
-                    switch (num) {
-                      case 1:
-                        if (jsonobj['target']['Primary'].contains(widget.name)) {
-                          result.add(jsonobj);
-                        }
-                        break;
-
-                      case 2:
-                        if (jsonobj['target']['Primary'].contains(widget.name) ||
-                            jsonobj['target']['Secondary'].contains(widget.name)) {
-                          result.add(jsonobj);
-                        }
-                        break;
-                      case 3:
-                        if (jsonobj['target']['Primary'].contains(widget.name) ||
-                            jsonobj['target']['Secondary'].contains(widget.name) ||
-                            jsonobj['target']['Tertiary'].contains(widget.name)) {
-                          result.add(jsonobj);
-                        }
-                        break;
-                      default:
-                        result.add(jsonobj);
-                        break;
-                    }
-                  }
-                  return ListView.builder(
-                      itemCount: result.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        //setting video URLS
-                        Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
-                        Map<String, String> Map_values = {};
-                        int param = 0;
-                        for (var value in videoURLS) {
-                          if (widget.gender == "Male") {
-                            Map_values[param.toString()] = value
-                                .toString()
-                                .substring(0, value.toString().length - 6);
-                          }
-                          ////the above step is been considered because there are no female videos associated in the above API, instead the slight change in string replacing male with female produces the result
-                          else if (widget.gender == "Female") {
-                            Map_values[param.toString()] = value
-                                .toString()
-                                .substring(0, value.toString().length - 6);
-                            print(
-                                "check if it has a male(if yes replace with female) : ");
-                            int pos =
-                            Map_values[param.toString()]!.indexOf(r'male');
-                            print(pos);
-                            print(Map_values[param.toString()]
-                                ?.substring(pos, pos + 4));
-                            Map_values[param.toString()] =
-                                Map_values[param.toString()]!
-                                    .replaceRange(pos, pos + 4, "female");
-                            print("replaced and it is : ");
-                            print(Map_values[param.toString()]);
-                          }
-                          param++;
-                          print(value);
-                        }
-
-                        //setting instructions
-                        List<dynamic> instructions =
-                        result[index]['steps'].toList();
-                        List<String> Steps = [];
-                        for (var value in instructions) {
-                          Steps.add(value.toString());
-                        }
-                        return GestureDetector(
-                            onTap: () {},
-                            child: SizedBox(
-                                width: double.infinity,
-                                height: 120,
-                                child: Card(
-                                    color: Color(0xFFE0E0E0),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 10),
-                                      child: Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                result[index]['exercise_name'],
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.black),
-                                              ),
-                                            ),
-                                            Container(
-                                                height: 30,
-                                                child:
-                                                FloatingActionButton.extended(
-                                                  heroTag: null,
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) => Display(
-                                                              title: result[index]
-                                                              ['exercise_name'],
-                                                              Map_Values:
-                                                              Map_values,
-                                                              Category:
-                                                              result[index]
-                                                              ['Category'],
-                                                              Difficulty: result[
-                                                              index]
-                                                              ['Difficulty'],
-                                                              Exercise_Name: result[
-                                                              index]
-                                                              ['exercise_name'],
-                                                              Steps: Steps),
-                                                        ));
-                                                  },
-                                                  label: Text(
-                                                    'Play',
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors.white),
-                                                  ),
-                                                  icon: Icon(
-                                                    Icons.play_arrow,
-                                                    size: 15,
-                                                  ),
-                                                  backgroundColor:
-                                                  Colors.lightBlueAccent,
-                                                )),
-                                          ]),
-                                    ))));
-                      });
-                } else {
-                  return Center(child: CircularProgressIndicator());
-                }
-                break;
-              case 2:
-                if (snapshot.hasData) {
-                  List<dynamic> details = List.from(snapshot.data);
-                  List<dynamic> result = [];
-                  //segregate the data according to body parts
-                  for (var jsonobj in details) {
-                    if (jsonobj['Category'] == widget.name) {
+      future: futureDetails,
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+        //add a switch case condition to verify the details
+        switch (widget.choice) {
+          case 1:
+            if (snapshot.hasData) {
+              List<dynamic> details = List.from(snapshot.data);
+              List<dynamic> result = [];
+              //segregate the data according to body parts
+              for (var jsonobj in details) {
+                int num = jsonobj['target'].length;
+                switch (num) {
+                  case 1:
+                    if (jsonobj['target']['Primary'].contains(widget.name)) {
                       result.add(jsonobj);
                     }
-                  }
+                    break;
 
-                  return ListView.builder(
-                      itemCount: result.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        //setting video URLS
-                        Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
-                        Map<String, String> Map_values = {};
-                        int param = 0;
-                        for (var value in videoURLS) {
-                          Map_values[param.toString()] = value
-                              .toString()
-                              .substring(0, value.toString().length - 6);
-                          param++;
-                        }
-
-                        //setting instructions
-                        List<dynamic> instructions =
-                        result[index]['steps'].toList();
-                        List<String> Steps = [];
-                        for (var value in instructions) {
-                          Steps.add(value.toString());
-                        }
-                        return GestureDetector(
-                            onTap: () {},
-                            child: SizedBox(
-                                width: double.infinity,
-                                height: 120,
-                                child: Card(
-                                    color: Color(0xFFE0E0E0),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10.0),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 20, horizontal: 10),
-                                      child: Column(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                          crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          children: [
-                                            Expanded(
-                                              child: Text(
-                                                result[index]['exercise_name'],
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w500,
-                                                    color: Colors.black),
-                                              ),
-                                            ),
-                                            Container(
-                                                height: 30,
-                                                child:
-                                                FloatingActionButton.extended(
-                                                  heroTag: null,
-                                                  onPressed: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) => Display(
-                                                              title: result[index]
-                                                              ['exercise_name'],
-                                                              Map_Values:
-                                                              Map_values,
-                                                              Category:
-                                                              result[index]
-                                                              ['Category'],
-                                                              Difficulty: result[
-                                                              index]
-                                                              ['Difficulty'],
-                                                              Exercise_Name: result[
-                                                              index]
-                                                              ['exercise_name'],
-                                                              Steps: Steps),
-                                                        ));
-                                                  },
-                                                  label: Text(
-                                                    'Play',
-                                                    style: TextStyle(
-                                                        fontSize: 14,
-                                                        color: Colors.white),
-                                                  ),
-                                                  icon: Icon(
-                                                    Icons.play_arrow,
-                                                    size: 15,
-                                                  ),
-                                                  backgroundColor:
-                                                  Colors.lightBlueAccent,
-                                                )),
-                                          ]),
-                                    ))));
-                      });
-                } else {
-                  return Center(child: CircularProgressIndicator());
+                  case 2:
+                    if (jsonobj['target']['Primary'].contains(widget.name) ||
+                        jsonobj['target']['Secondary'].contains(widget.name)) {
+                      result.add(jsonobj);
+                    }
+                    break;
+                  case 3:
+                    if (jsonobj['target']['Primary'].contains(widget.name) ||
+                        jsonobj['target']['Secondary'].contains(widget.name) ||
+                        jsonobj['target']['Tertiary'].contains(widget.name)) {
+                      result.add(jsonobj);
+                    }
+                    break;
+                  default:
+                    result.add(jsonobj);
+                    break;
                 }
-                break;
-              default:
-                return Center(child: CircularProgressIndicator());
+              }
+              return ListView.builder(
+                  itemCount: result.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    //setting video URLS
+                    Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
+                    Map<String, String> Map_values = {};
+                    int param = 0;
+                    for (var value in videoURLS) {
+                      if (widget.gender == "Male") {
+                        Map_values[param.toString()] = value
+                            .toString()
+                            .substring(0, value.toString().length - 6);
+                      }
+                      ////the above step is been considered because there are no female videos associated in the above API, instead the slight change in string replacing male with female produces the result
+                      else if (widget.gender == "Female") {
+                        Map_values[param.toString()] = value
+                            .toString()
+                            .substring(0, value.toString().length - 6);
+                        print(
+                            "check if it has a male(if yes replace with female) : ");
+                        int pos =
+                            Map_values[param.toString()]!.indexOf(r'male');
+                        print(pos);
+                        print(Map_values[param.toString()]
+                            ?.substring(pos, pos + 4));
+                        Map_values[param.toString()] =
+                            Map_values[param.toString()]!
+                                .replaceRange(pos, pos + 4, "female");
+                        print("replaced and it is : ");
+                        print(Map_values[param.toString()]);
+                      }
+                      param++;
+                      print(value);
+                    }
+
+                    //setting instructions
+                    List<dynamic> instructions =
+                        result[index]['steps'].toList();
+                    List<String> Steps = [];
+                    for (var value in instructions) {
+                      Steps.add(value.toString());
+                    }
+                    return Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      child: Card(
+                          color: Color(0xFFE0E0E0),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Center(
+                            child: ListTile(
+                              title:Text(
+                                  result[index]['exercise_name'],
+                                  style: GoogleFonts.nunitoSans(
+                                    fontSize:20,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black,
+                                  )),
+                              subtitle:Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  ElevatedButton.icon(
+                                    onPressed: (){},
+                                    label: Text("Play",style: GoogleFonts.nunitoSans(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white,
+                                    ),),
+                                    icon: Icon(Icons.play_arrow,size: 15,),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Color(0xFF60BCFA),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30.0),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                      ),
+                    );
+                  });
+            } else {
+              return Center(child: CircularProgressIndicator());
             }
-          },
-        ));
+            break;
+          case 2:
+            if (snapshot.hasData) {
+              List<dynamic> details = List.from(snapshot.data);
+              List<dynamic> result = [];
+              //segregate the data according to body parts
+              for (var jsonobj in details) {
+                if (jsonobj['Category'] == widget.name) {
+                  result.add(jsonobj);
+                }
+              }
+
+              return ListView.builder(
+                physics: BouncingScrollPhysics(),
+                  itemCount: result.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    //setting video URLS
+                    Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
+                    Map<String, String> Map_values = {};
+                    int param = 0;
+                    for (var value in videoURLS) {
+                      Map_values[param.toString()] = value
+                          .toString()
+                          .substring(0, value.toString().length - 6);
+                      param++;
+                    }
+
+                    //setting instructions
+                    List<dynamic> instructions =
+                        result[index]['steps'].toList();
+                    List<String> Steps = [];
+                    for (var value in instructions) {
+                      Steps.add(value.toString());
+                    }
+                    return Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      child: Card(
+                        color: Color(0xFFE0E0E0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: Center(
+                          child: ListTile(
+                            title:Text(
+                                result[index]['exercise_name'],
+                                style: GoogleFonts.nunitoSans(
+                                  fontSize:20,
+                                  fontWeight: FontWeight.w700,
+                                  color: Colors.black,
+                                )),
+                            subtitle:Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                ElevatedButton.icon(
+                                    onPressed: (){},
+                                    label: Text("Play",style: GoogleFonts.nunitoSans(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white,
+                                    ),),
+                                  icon: Icon(Icons.play_arrow,size: 15,),
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: Color(0xFF60BCFA),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ),
+                    );
+                  },
+              );
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+            break;
+          default:
+            return Center(child: CircularProgressIndicator());
+        }
+      },
+    ));
   }
 }
 
@@ -490,12 +614,12 @@ class Display extends StatefulWidget {
 
   Display(
       {Key? key,
-        required this.title,
-        required this.Map_Values,
-        required this.Category,
-        required this.Difficulty,
-        required this.Exercise_Name,
-        required this.Steps})
+      required this.title,
+      required this.Map_Values,
+      required this.Category,
+      required this.Difficulty,
+      required this.Exercise_Name,
+      required this.Steps})
       : super(key: key);
 
   @override
@@ -627,7 +751,7 @@ class _DisplayState extends State<Display> {
                           thumbColor: Colors.white,
                           onChanged: (value) {
                             Duration newPosition =
-                            Duration(milliseconds: value.toInt());
+                                Duration(milliseconds: value.toInt());
                             _videoController.seekTo(newPosition).then((_) {
                               setState(() {
                                 _currentPosition = newPosition;
@@ -657,9 +781,9 @@ class _DisplayState extends State<Display> {
                             icon: Image.asset(
                               'assets/icons/camera-rotate-light.png', // Replace with the path to your image
                               width:
-                              40, // Set an appropriate width for the icon
+                                  40, // Set an appropriate width for the icon
                               height:
-                              30, // Set an appropriate height for the icon
+                                  30, // Set an appropriate height for the icon
                             ),
                             color: Colors.cyanAccent,
                           ),
