@@ -1,9 +1,5 @@
 import 'dart:core';
-import 'dart:ui';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:readmore/readmore.dart';
 import 'package:updated_health_app/components/yoga.dart';
 import 'package:video_player/video_player.dart';
 import 'package:updated_health_app/components/workoutsAPI.dart';
@@ -75,35 +71,42 @@ class _musclewikiState extends State<musclewiki> {
     }
     print(widget.gender);
     final List<BodyPart> bodyParts = [
-      BodyPart(name: "Shoulders", top: 17, left: 35, right: 0, gender: widget.gender, pos: 'any'),
-      BodyPart(name: "Shoulders", top: 17, left: 0, right: 35, gender: widget.gender, pos: 'any'),
+      BodyPart(name: "Shoulders", top: 20, left: 35, right: 0, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Shoulders", top: 20, left: 0, right: 35, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Shoulders", top: 20, left: 33, right: 0, gender: widget.gender, pos: 'rear'),
+      BodyPart(name: "Shoulders", top: 20, left: 0, right: 38, gender: widget.gender, pos: 'rear'),
 
       BodyPart(name: "Chest", top: 20, left: 0, right: 0, gender: widget.gender, pos: 'front'),
       BodyPart(name: "Traps", top: 20, left: 0, right: 0, gender: widget.gender, pos: 'rear'),
       //
-      BodyPart(name: "Biceps", top: 25, left: 50, right: 0, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Biceps", top: 25, left: 0, right: 50, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Triceps", top: 25, left: 50, right: 0, gender: widget.gender, pos: 'rear'),
+      BodyPart(name: "Biceps", top: 29, left: 50, right: 0, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Biceps", top: 29, left: 0, right: 50, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Triceps", top: 25, left: 43, right: 0, gender: widget.gender, pos: 'rear'),
       BodyPart(name: "Triceps", top: 25, left: 0, right: 50, gender: widget.gender, pos: 'rear'),
       //
-      BodyPart(name: "Forearms", top: 32, left: 72, right: 0, gender: widget.gender, pos: 'any'),
-      BodyPart(name: "Forearms", top: 32, left: 0, right: 72, gender: widget.gender, pos: 'any'),
+      BodyPart(name: "Forearms", top: 38, left: 72, right: 0, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Forearms", top: 38, left: 0, right: 72, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Forearms", top: 38, left: 67, right: 0, gender: widget.gender, pos: 'rear'),
+      BodyPart(name: "Forearms", top: 38, left: 0, right: 72, gender: widget.gender, pos: 'rear'),
       //
       BodyPart(name: "Abdominals", top: 30, left: 0, right: 0, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Lower back", top: 30, left: 0, right: 0, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Abdominals", top: 30, left: 20, right: 0, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Lower back", top: 35, left: 0, right: 0, gender: widget.gender, pos: 'rear'),
+      BodyPart(name: "Abdominals", top: 35, left: 25, right: 0, gender: widget.gender, pos: 'front'),
       BodyPart(name: "Lats", top: 30, left: 20, right: 0, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Abdominals", top: 30, left: 0, right: 20, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Abdominals", top: 35, left: 0, right: 25, gender: widget.gender, pos: 'front'),
       BodyPart(name: "Lats", top: 30, left: 0, right: 20, gender: widget.gender, pos: 'rear'),
       //Midbody parts
-      BodyPart(name: "Glutes", top: 40, left: 0, right: 20, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Quads", top: 50, left: 0, right: 20, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Quads", top: 50, left: 20, right: 0, gender: widget.gender, pos: 'front'),
-      BodyPart(name: "Hamstrings", top: 50, left: 0, right: 20, gender: widget.gender, pos: 'rear'),
-      BodyPart(name: "Hamstrings", top: 50, left: 20, right: 0, gender: widget.gender, pos: 'rear'),
+      BodyPart(name: "Glutes", top: 45, left: 0, right: 20, gender: widget.gender, pos: 'rear'),
+      BodyPart(name: "Quads", top: 60, left: 0, right: 20, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Quads", top: 60, left: 20, right: 0, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Hamstrings", top: 60, left: 0, right: 20, gender: widget.gender, pos: 'rear'),
+      BodyPart(name: "Hamstrings", top: 60, left: 20, right: 0, gender: widget.gender, pos: 'rear'),
       //leg parts
-      BodyPart(name: "Calves", top: 70, left: 0, right: 30, gender: widget.gender, pos: 'any'),
-      BodyPart(name: "Calves", top: 70, left: 30, right: 0, gender: widget.gender, pos: 'any'),
+      BodyPart(name: "Calves", top: 80, left: 0, right: 35, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Calves", top: 80, left: 35, right: 0, gender: widget.gender, pos: 'front'),
+      BodyPart(name: "Calves", top: 78, left: 0, right: 35, gender: widget.gender, pos: 'rear'),
+      BodyPart(name: "Calves", top: 78, left: 25, right: 0, gender: widget.gender, pos: 'rear'),
+
 
 
     ];
@@ -137,7 +140,7 @@ class _musclewikiState extends State<musclewiki> {
                     if ((hasFront && isFrontOrAny) || (hasRear && isRearOrAny)) {
                       return Positioned(
                         top: (screenHeight * bodyPart.top) / 100,
-                        left: (screenWidth * bodyPart.left) / 100,
+                        left: (screenWidth * bodyPart.left) /100,
                         right: (screenWidth * bodyPart.right) / 100,
                         child: InkWell(
                           child: Container(
@@ -180,7 +183,7 @@ class _musclewikiState extends State<musclewiki> {
   }
 
 
-    class Fetch extends StatefulWidget {
+class Fetch extends StatefulWidget {
   int choice;
   String name;
   String gender;

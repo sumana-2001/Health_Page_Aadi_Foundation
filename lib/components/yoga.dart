@@ -29,19 +29,18 @@ List<String> weekdays = [
   "Sunday"
 ];
 Map<String, List<String>> Tasks = {
-  "Yoga": ["assets/images/yoga_3d.png"],
-  "Meditation": ["assets/images/meditation_3d.png"],
-  "Stretches": ["assets/images/streching_3d.png"],
-  "Cables": ["assets/images/cables_3d.jpeg"],
-  "Bodyweight": ["assets/images/body_lifting_3d.jpeg"],
-  "Kettlebells": ["assets/images/kettlebells_3d.jpeg"],
+  "Yoga": ["assets/flow-pic/yoga.png"],
+  "Meditation": ["assets/flow-pic/meditation.png"],
+  "Stretches": ["assets/flow-pic/stretches.png"],
+  "Cables": ["assets/flow-pic/cables.png"],
+  "Bodyweight": ["assets/flow-pic/bodyweight.png"],
+  "Kettlebells": ["assets/flow-pic/kettlebells.png"],
   "Male Anatomy": ["assets/icons/man_front.png"],
   "Female Anatomy": ["assets/icons/women_front.png"]
 };
 
 class _yogaState extends State<yoga> {
   double _currVal = 0;
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -179,14 +178,14 @@ class _yogaState extends State<yoga> {
                       ),
                     ),
                   ),
-                  Container(
-                    height: MediaQuery.of(context).size.height / 3.7,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 1.8,
                     width: double.infinity,
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        crossAxisSpacing: 3.0,
-                        mainAxisSpacing: 3.0,
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 4.0,
+                        mainAxisSpacing: 4.0,
                       ),
                       itemCount: Tasks.length,
                       scrollDirection: Axis.horizontal,
@@ -238,21 +237,36 @@ class _yogaState extends State<yoga> {
                               );
                             }
                           },
-                          child: Card(
-                            color: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            child: ClipRect(
-                                  child: Ink.image(
-                                    image: AssetImage(
-                                        Tasks.values.elementAt(index)[0]),
-                                    fit: BoxFit.fill,
-                                    height:
-                                        MediaQuery.of(context).size.height / 5,
-                                    width: MediaQuery.of(context).size.width / 4,
-                                  ),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                width: MediaQuery.of(context).size.width / 2.8,
+                                child: Card(
+                                  elevation: 1,
+                                  color: Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20)),
+                                  child: ClipRect(
+                                        child: Ink.image(
+                                          image: AssetImage(
+                                              Tasks.values.elementAt(index)[0]),
+                                          fit: BoxFit.fill,
+                                          height:
+                                              MediaQuery.of(context).size.height / 5,
+                                          width: MediaQuery.of(context).size.width / 5,
+                                        ),
+                                      ),
                                 ),
-
+                              ),
+                              SizedBox(
+                                height: 3,),
+                              Text('${Tasks.keys.elementAt(index)}',
+                                  style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16,
+                                    color: Colors.grey[700],
+                                  )),
+                            ],
                           ),
                         );
                       },
@@ -273,7 +287,7 @@ class _yogaState extends State<yoga> {
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
@@ -304,8 +318,21 @@ class _yogaState extends State<yoga> {
                               ),
 
                             ),
-                            subtitle: LinearProgressIndicator(
-                              value: _currVal/10, // Progress value (between 0 and 1)
+                            subtitle: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text('Time',
+                                  style: GoogleFonts.nunitoSans(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 12,
+                                    color: Colors.grey[700],
+                                  ),
+                                ),
+                                SizedBox(height: 5,),
+                                LinearProgressIndicator(
+                                  value: _currVal, // Progress value (between 0 and 1)
+                                ),
+                              ],
                             ),
                           ),
                         );
