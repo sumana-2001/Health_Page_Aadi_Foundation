@@ -51,11 +51,11 @@ class BodyPart {
   final String pos;
   const BodyPart(
       {required this.name,
-      required this.top,
-      required this.left,
-      required this.right,
-      required this.gender,
-      required this.pos});
+        required this.top,
+        required this.left,
+        required this.right,
+        required this.gender,
+        required this.pos});
 }
 
 class _musclewikiState extends State<musclewiki> {
@@ -367,9 +367,9 @@ class Fetch extends StatefulWidget {
   String gender;
   Fetch(
       {Key? key,
-      required this.name,
-      required this.choice,
-      required this.gender})
+        required this.name,
+        required this.choice,
+        required this.gender})
       : super(key: key);
 
   @override
@@ -392,215 +392,241 @@ class _FetchDetails extends State<Fetch> {
     print(widget.gender);
     return Scaffold(
         body: FutureBuilder<List<dynamic>>(
-      future: futureDetails,
-      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-        //add a switch case condition to verify the details
-        switch (widget.choice) {
-          case 1:
-            if (snapshot.hasData) {
-              List<dynamic> details = List.from(snapshot.data);
-              List<dynamic> result = [];
-              //segregate the data according to body parts
-              for (var jsonobj in details) {
-                int num = jsonobj['target'].length;
-                switch (num) {
-                  case 1:
-                    if (jsonobj['target']['Primary'].contains(widget.name)) {
-                      result.add(jsonobj);
-                    }
-                    break;
+          future: futureDetails,
+          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+            //add a switch case condition to verify the details
+            switch (widget.choice) {
+              case 1:
+                if (snapshot.hasData) {
+                  List<dynamic> details = List.from(snapshot.data);
+                  List<dynamic> result = [];
+                  //segregate the data according to body parts
+                  for (var jsonobj in details) {
+                    int num = jsonobj['target'].length;
+                    switch (num) {
+                      case 1:
+                        if (jsonobj['target']['Primary'].contains(widget.name)) {
+                          result.add(jsonobj);
+                        }
+                        break;
 
-                  case 2:
-                    if (jsonobj['target']['Primary'].contains(widget.name) ||
-                        jsonobj['target']['Secondary'].contains(widget.name)) {
-                      result.add(jsonobj);
+                      case 2:
+                        if (jsonobj['target']['Primary'].contains(widget.name) ||
+                            jsonobj['target']['Secondary'].contains(widget.name)) {
+                          result.add(jsonobj);
+                        }
+                        break;
+                      case 3:
+                        if (jsonobj['target']['Primary'].contains(widget.name) ||
+                            jsonobj['target']['Secondary'].contains(widget.name) ||
+                            jsonobj['target']['Tertiary'].contains(widget.name)) {
+                          result.add(jsonobj);
+                        }
+                        break;
+                      default:
+                        result.add(jsonobj);
+                        break;
                     }
-                    break;
-                  case 3:
-                    if (jsonobj['target']['Primary'].contains(widget.name) ||
-                        jsonobj['target']['Secondary'].contains(widget.name) ||
-                        jsonobj['target']['Tertiary'].contains(widget.name)) {
-                      result.add(jsonobj);
-                    }
-                    break;
-                  default:
-                    result.add(jsonobj);
-                    break;
-                }
-              }
-              return ListView.builder(
-                  itemCount: result.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    //setting video URLS
-                    Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
-                    Map<String, String> Map_values = {};
-                    int param = 0;
-                    for (var value in videoURLS) {
-                      if (widget.gender == "Male") {
-                        Map_values[param.toString()] = value
-                            .toString()
-                            .substring(0, value.toString().length - 6);
-                      }
-                      ////the above step is been considered because there are no female videos associated in the above API, instead the slight change in string replacing male with female produces the result
-                      else if (widget.gender == "Female") {
-                        Map_values[param.toString()] = value
-                            .toString()
-                            .substring(0, value.toString().length - 6);
-                        print(
-                            "check if it has a male(if yes replace with female) : ");
-                        int pos =
+                  }
+                  return ListView.builder(
+                      itemCount: result.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        //setting video URLS
+                        Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
+                        Map<String, String> Map_values = {};
+                        int param = 0;
+                        for (var value in videoURLS) {
+                          if (widget.gender == "Male") {
+                            Map_values[param.toString()] = value
+                                .toString()
+                                .substring(0, value.toString().length - 6);
+                          }
+                          ////the above step is been considered because there are no female videos associated in the above API, instead the slight change in string replacing male with female produces the result
+                          else if (widget.gender == "Female") {
+                            Map_values[param.toString()] = value
+                                .toString()
+                                .substring(0, value.toString().length - 6);
+                            print(
+                                "check if it has a male(if yes replace with female) : ");
+                            int pos =
                             Map_values[param.toString()]!.indexOf(r'male');
-                        print(pos);
-                        print(Map_values[param.toString()]
-                            ?.substring(pos, pos + 4));
-                        Map_values[param.toString()] =
-                            Map_values[param.toString()]!
-                                .replaceRange(pos, pos + 4, "female");
-                        print("replaced and it is : ");
-                        print(Map_values[param.toString()]);
-                      }
-                      param++;
-                      print(value);
-                    }
+                            print(pos);
+                            print(Map_values[param.toString()]
+                                ?.substring(pos, pos + 4));
+                            Map_values[param.toString()] =
+                                Map_values[param.toString()]!
+                                    .replaceRange(pos, pos + 4, "female");
+                            print("replaced and it is : ");
+                            print(Map_values[param.toString()]);
+                          }
+                          param++;
+                          print(value);
+                        }
 
-                    //setting instructions
-                    List<dynamic> instructions =
+                        //setting instructions
+                        List<dynamic> instructions =
                         result[index]['steps'].toList();
-                    List<String> Steps = [];
-                    for (var value in instructions) {
-                      Steps.add(value.toString());
-                    }
-                    return Container(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      child: Card(
-                          color: Color(0xFFE0E0E0),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Center(
-                            child: ListTile(
-                              title:Text(
-                                  result[index]['exercise_name'],
-                                  style: GoogleFonts.nunitoSans(
-                                    fontSize:20,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black,
-                                  )),
-                              subtitle:Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  ElevatedButton.icon(
-                                    onPressed: (){},
-                                    label: Text("Play",style: GoogleFonts.nunitoSans(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
-                                    ),),
-                                    icon: Icon(Icons.play_arrow,size: 15,),
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Color(0xFF60BCFA),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30.0),
-                                      ),
-                                    ),
-                                  )
-                                ],
+                        List<String> Steps = [];
+                        for (var value in instructions) {
+                          Steps.add(value.toString());
+                        }
+                        return Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          child: Card(
+                              color: Color(0xFFE0E0E0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
                               ),
-                            ),
-                          )
-                      ),
-                    );
-                  });
-            } else {
-              return Center(child: CircularProgressIndicator());
-            }
-            break;
-          case 2:
-            if (snapshot.hasData) {
-              List<dynamic> details = List.from(snapshot.data);
-              List<dynamic> result = [];
-              //segregate the data according to body parts
-              for (var jsonobj in details) {
-                if (jsonobj['Category'] == widget.name) {
-                  result.add(jsonobj);
-                }
-              }
-
-              return ListView.builder(
-                physics: BouncingScrollPhysics(),
-                  itemCount: result.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    //setting video URLS
-                    Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
-                    Map<String, String> Map_values = {};
-                    int param = 0;
-                    for (var value in videoURLS) {
-                      Map_values[param.toString()] = value
-                          .toString()
-                          .substring(0, value.toString().length - 6);
-                      param++;
-                    }
-
-                    //setting instructions
-                    List<dynamic> instructions =
-                        result[index]['steps'].toList();
-                    List<String> Steps = [];
-                    for (var value in instructions) {
-                      Steps.add(value.toString());
-                    }
-                    return Container(
-                      width: double.infinity,
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      child: Card(
-                        color: Color(0xFFE0E0E0),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Center(
-                          child: ListTile(
-                            title:Text(
-                                result[index]['exercise_name'],
-                                style: GoogleFonts.nunitoSans(
-                                  fontSize:20,
-                                  fontWeight: FontWeight.w700,
-                                  color: Colors.black,
-                                )),
-                            subtitle:Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                ElevatedButton.icon(
-                                    onPressed: (){},
-                                    label: Text("Play",style: GoogleFonts.nunitoSans(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.white,
-                                    ),),
-                                  icon: Icon(Icons.play_arrow,size: 15,),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xFF60BCFA),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
+                              child: Center(
+                                child: ListTile(
+                                  title:Text(
+                                      result[index]['exercise_name'],
+                                      style: GoogleFonts.nunitoSans(
+                                        fontSize:20,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.black,
+                                      )),
+                                  subtitle:Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      ElevatedButton.icon(
+                                        onPressed: (){
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Display(
+                                                        title: result[index]['exercise_name'],
+                                                        Map_Values: Map_values,
+                                                        Category: result[index]['Category'],
+                                                        Difficulty: result[index]['Difficulty'],
+                                                        Exercise_Name: result[index]['exercise_name'],
+                                                        Steps: Steps
+                                                    ),));
+                                        },
+                                        label: Text("Play",style: GoogleFonts.nunitoSans(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white,
+                                        ),),
+                                        icon: Icon(Icons.play_arrow,size: 15,),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Color(0xFF60BCFA),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(30.0),
+                                          ),
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              )
                           ),
-                        )
-                      ),
-                    );
-                  },
-              );
-            } else {
-              return Center(child: CircularProgressIndicator());
+                        );
+                      });
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+                break;
+              case 2:
+                if (snapshot.hasData) {
+                  List<dynamic> details = List.from(snapshot.data);
+                  List<dynamic> result = [];
+                  //segregate the data according to body parts
+                  for (var jsonobj in details) {
+                    if (jsonobj['Category'] == widget.name) {
+                      result.add(jsonobj);
+                    }
+                  }
+
+                  return ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemCount: result.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      //setting video URLS
+                      Set<dynamic> videoURLS = result[index]['videoURL'].toSet();
+                      Map<String, String> Map_values = {};
+                      int param = 0;
+                      for (var value in videoURLS) {
+                        Map_values[param.toString()] = value
+                            .toString()
+                            .substring(0, value.toString().length - 6);
+                        param++;
+                      }
+
+                      //setting instructions
+                      List<dynamic> instructions =
+                      result[index]['steps'].toList();
+                      List<String> Steps = [];
+                      for (var value in instructions) {
+                        Steps.add(value.toString());
+                      }
+                      return Container(
+                        width: double.infinity,
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        child: Card(
+                            color: Color(0xFFE0E0E0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            child: Center(
+                              child: ListTile(
+                                title:Text(
+                                    result[index]['exercise_name'],
+                                    style: GoogleFonts.nunitoSans(
+                                      fontSize:20,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black,
+                                    )),
+                                subtitle:Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    ElevatedButton.icon(
+                                      onPressed: (){
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Display(
+                                                      title: result[index]['exercise_name'],
+                                                      Map_Values: Map_values,
+                                                      Category: result[index]['Category'],
+                                                      Difficulty: result[index]['Difficulty'],
+                                                      Exercise_Name: result[index]['exercise_name'],
+                                                      Steps: Steps
+                                                  ),));
+                                      },
+                                      label: Text("Play",style: GoogleFonts.nunitoSans(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.white,
+                                      ),),
+                                      icon: Icon(Icons.play_arrow,size: 15,),
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color(0xFF60BCFA),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(30.0),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+                break;
+              default:
+                return Center(child: CircularProgressIndicator());
             }
-            break;
-          default:
-            return Center(child: CircularProgressIndicator());
-        }
-      },
-    ));
+          },
+        ));
   }
 }
 
@@ -614,12 +640,12 @@ class Display extends StatefulWidget {
 
   Display(
       {Key? key,
-      required this.title,
-      required this.Map_Values,
-      required this.Category,
-      required this.Difficulty,
-      required this.Exercise_Name,
-      required this.Steps})
+        required this.title,
+        required this.Map_Values,
+        required this.Category,
+        required this.Difficulty,
+        required this.Exercise_Name,
+        required this.Steps})
       : super(key: key);
 
   @override
@@ -751,7 +777,7 @@ class _DisplayState extends State<Display> {
                           thumbColor: Colors.white,
                           onChanged: (value) {
                             Duration newPosition =
-                                Duration(milliseconds: value.toInt());
+                            Duration(milliseconds: value.toInt());
                             _videoController.seekTo(newPosition).then((_) {
                               setState(() {
                                 _currentPosition = newPosition;
@@ -781,9 +807,9 @@ class _DisplayState extends State<Display> {
                             icon: Image.asset(
                               'assets/icons/camera-rotate-light.png', // Replace with the path to your image
                               width:
-                                  40, // Set an appropriate width for the icon
+                              40, // Set an appropriate width for the icon
                               height:
-                                  30, // Set an appropriate height for the icon
+                              30, // Set an appropriate height for the icon
                             ),
                             color: Colors.cyanAccent,
                           ),
